@@ -66,21 +66,6 @@ app.post('/postItems', async (req, res) => {
   }
 });
 
-// app.patch('/api/students/:id', async (req, res) => {
-//   try {
-//       const { id } = req.params;
-//       console.log(req.params);
-//       const updateData = req.body;
-//       const updatedStudent = await Student.findByIdAndUpdate(id, updateData, { new: true });
-//       if (updatedStudent) {
-//           res.status(200).json(updatedStudent);
-//       } else {
-//           res.status(404).json({ message: 'Student not found' });
-//       }
-//   } catch (error) {
-//       res.status(500).json({ message: 'Error updating student', error });
-//   }
-// });
 
 app.patch('/updateData/:id', multer().none(), (request, response) => {
   const id = request.params.id;

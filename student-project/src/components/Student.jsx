@@ -5,14 +5,14 @@ import { updateStudentData } from "../Redux/Slice/studentDetailsSlice";
 
 export const Student = () => {
     const studentDetails = useSelector((state) => state.login.loginUser);
-    // const updateData = useSelector(state=>state.studentUpdateDelete);
+    const upData = useSelector(state=>state.studentUpdateDelete);
     const dispatch = useDispatch();
     const [editId, setEditId] = useState(null);
     const [editedData, setEditedData] = useState({ id:"", studentName: "", fatherName: "", userId: "" });
 
     useEffect(() => {
         dispatch(fetchData());
-    }, [dispatch]);
+    },[upData.updateData]);
 
     const handleEditClick = (student) => {
         setEditId(student._id);
@@ -24,6 +24,7 @@ export const Student = () => {
         // For example: dispatch(updateStudent(editedData));
         dispatch(updateStudentData(editedData));
         // console.log(editedData);
+        dispatch(fetchData());
         setEditId(null);
     };
 

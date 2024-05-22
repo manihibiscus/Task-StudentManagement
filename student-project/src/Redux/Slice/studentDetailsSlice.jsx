@@ -8,9 +8,13 @@ const studentDetailsSlice = createSlice({
         updateStudentData:(state, action)=>{
             state.updateData=action.payload
             console.log("Updating Data"+state.updateData.userId);
-            axios.patch(`http://localhost:3000/updateData/${state.updateData.id}`,state.updateData).then(response=>{
-                console.log(response);
+            axios.patch(`http://localhost:3000/updateData/${state.updateData.id}`,state.updateData)
+            .then(response=>{
+                alert(response);
             })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     }
 });
