@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../Redux/Slice/loginSlice";
+import { updateStudentData } from "../Redux/Slice/studentDetailsSlice";
 
 export const Student = () => {
     const studentDetails = useSelector((state) => state.login.loginUser);
+    // const updateData = useSelector(state=>state.studentUpdateDelete);
     const dispatch = useDispatch();
     const [editId, setEditId] = useState(null);
-    const [editedData, setEditedData] = useState({ studentName: "", fatherName: "", userId: "" });
+    const [editedData, setEditedData] = useState({ id:"", studentName: "", fatherName: "", userId: "" });
 
     useEffect(() => {
         dispatch(fetchData());
@@ -14,16 +16,20 @@ export const Student = () => {
 
     const handleEditClick = (student) => {
         setEditId(student._id);
-        setEditedData({ studentName: student.studentName, fatherName: student.fatherName, userId: student.userId });
+        setEditedData({ id:student._id, studentName: student.studentName, fatherName: student.fatherName, userId: student.userId });
     };
 
     const handleSaveClick = () => {
+        // Dispatch an action to update the data in the Redux store and/or backend
+        // For example: dispatch(updateStudent(editedData));
+        dispatch(updateStudentData(editedData));
+        // console.log(editedData);
         setEditId(null);
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEditedData({ ...editedData, [name]: value });
+        setEditedData({...editedData, [name]: value });
     };
     const handleCancleClick = () =>{
         setEditId(null)
@@ -93,7 +99,7 @@ export const Student = () => {
                                     </button>
                                     <button
                                         onClick={handleCancleClick}
-                                        className="bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                                        className="bg-red-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
                                     >
                                         Cancel
                                     </button>

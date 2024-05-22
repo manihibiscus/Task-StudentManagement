@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import { MongoClient } from 'mongodb';
-import 'dotenv/config'
+import 'dotenv/config';
+import multer from 'multer'
+import { ObjectId } from 'mongodb';
 const app = express();
 const port = 3000;
 
@@ -62,6 +64,53 @@ app.post('/postItems', async (req, res) => {
   } catch (error) {
     res.status(500).send('Error inserting data into the database');
   }
+});
+
+// app.patch('/api/students/:id', async (req, res) => {
+//   try {
+//       const { id } = req.params;
+//       console.log(req.params);
+//       const updateData = req.body;
+//       const updatedStudent = await Student.findByIdAndUpdate(id, updateData, { new: true });
+//       if (updatedStudent) {
+//           res.status(200).json(updatedStudent);
+//       } else {
+//           res.status(404).json({ message: 'Student not found' });
+//       }
+//   } catch (error) {
+//       res.status(500).json({ message: 'Error updating student', error });
+//   }
+// });
+
+app.patch('/updateData/:id', multer().none(), (request, response) => {
+  const id = request.params.id;
+  console.log(id);
+  console.log(request.body);
+  const updatedStudentName = request.body.studentName;
+  const updatedFatherName = request.body.fatherName;
+  const updatedEmail = request.body.userId;
+
+  // console.log(updatedName);
+
+  // Update the data in the database using the provided id
+  const database = client.db('PracticeReact');
+  database.collection("LoginUsers").updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: {
+        studentName: updatedStudentName,
+        fatherName: updatedFatherName,
+        userId: updatedEmail
+      }
+    },
+    (error, result) => {
+      if (error) {
+        response.status(500).json({ error: "Update failed" });
+      } else {
+        response.json("Updated Successfully");
+      }
+    }
+  );
 });
 
 app.listen(port, () => {
