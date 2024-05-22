@@ -97,8 +97,7 @@ const loginSlice = createSlice({
                     state.password="";
                     state.navigation=false;
                     state.adminNavigation=true;
-                    // const booleanValue = true;
-                    // sessionStorage.setItem('myBoolean', JSON.stringify(booleanValue));               
+                    sessionStorage.setItem('adminLogged', JSON.stringify(state.adminNavigation));               
                  }
                 else{
                     alert("Invalid User");
