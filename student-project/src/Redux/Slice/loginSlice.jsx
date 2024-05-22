@@ -5,9 +5,12 @@ export const fetchData = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get("http://localhost:3000/items");
+            const response2 = await axios.get("http://localhost:3000/adminItem");
             const data = response.data;
+            const data2 = response2.data;
             console.log(data[0].userId);
             dispatch(fetchLoginData(data));
+            dispatch(fetchAdminData(data2));
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -20,11 +23,13 @@ const loginSlice = createSlice({
         password: "",
         errors: {email:"", password:"", emailStatus:false, passStatus:false},
         navigation:false,
-        loginUser:[]
+        adminNavigation:false,
+        loginUser:[],
+        adminUser:[]
     },
     reducers:{
-        setEmail:(state,actions)=>{
-            state.email=actions.payload
+        setEmail:(state,action)=>{
+            state.email=action.payload
             let emailValidate = /\S+@\S+\.\S+/.test(state.email);
     
             if(!state.email){
@@ -45,8 +50,8 @@ const loginSlice = createSlice({
                 }
             }
         },
-        setPassword:(state,actions)=>{
-            state.password=actions.payload
+        setPassword:(state,action)=>{
+            state.password=action.payload
             let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,14}$/.test(state.password);
             if(!state.password){
                 state.errors.password="Password is required.";
@@ -69,12 +74,15 @@ const loginSlice = createSlice({
             }
             
         },
-        submitData:(state, actions)=>{
-            actions.payload.preventDefault();
+        submitData:(state, action)=>{
+            action.payload.preventDefault();
     
             const user=state.loginUser.find((b)=>{
                 return b.userId===state.email && b.password===state.password
-              });                                                                       
+              });
+            const admin=state.adminUser.find((c)=>{
+                return c.adminUSerId===state.email && c.adminPass===state.password
+            });                                                                       
             if(state.errors.passStatus === true && state.errors.emailStatus ===true){
                 
                 if(user){
@@ -83,8 +91,17 @@ const loginSlice = createSlice({
                 state.password="";
                 state.navigation=true;
                 }
+                else if(admin){
+                    alert("Login Successfully-Admin!!!");
+                    state.email="";
+                    state.password="";
+                    state.navigation=false;
+                    state.adminNavigation=true;
+                    // const booleanValue = true;
+                    // sessionStorage.setItem('myBoolean', JSON.stringify(booleanValue));               
+                 }
                 else{
-                    alert("Invalid User")
+                    alert("Invalid User");
                 }
             }
             else{
@@ -92,12 +109,16 @@ const loginSlice = createSlice({
             }
           
         },
-        fetchLoginData:(state, actions)=>{
-            state.loginUser=actions.payload;
+        fetchLoginData:(state, action)=>{
+            state.loginUser=action.payload;
             console.log("Fetch PRoduct" + state.loginUser);
+        },
+        fetchAdminData:(state, action)=>{
+            state.adminUser=action.payload;
+            console.log(state.adminUser[0].adminUSerId)
         }
     }
 });
 
-export const {submitData, setPassword, setEmail, fetchLoginData} = loginSlice.actions
+export const {submitData, setPassword, setEmail, fetchLoginData,fetchAdminData} = loginSlice.actions
 export default loginSlice.reducer;

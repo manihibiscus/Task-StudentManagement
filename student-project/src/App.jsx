@@ -9,6 +9,8 @@ import { Login } from './components/Login'
 import { Provider } from 'react-redux';
 import store from './Redux/Store'
 import { Register } from './components/Register'
+// import { AdminPage } from './components/AdminPage'
+import { Student } from './components/Student'
 function App() {
 
   return (
@@ -22,6 +24,7 @@ function App() {
      <Route path="/contact" element={<Contact />}/>
      <Route path="/login" element={<Login />}/>
      <Route path="/register" element={<Register />}/>
+     <Route path='/adminpage' element={<Student />} />
      </Routes>
      </Provider>
      </BrowserRouter>

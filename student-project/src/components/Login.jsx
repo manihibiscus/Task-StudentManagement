@@ -11,8 +11,11 @@ export const Login = () => {
         if(loginData.navigation){
             navigate('/');
         }
+        else if(loginData.adminNavigation){
+          navigate('/adminpage')
+        }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      },[loginData.navigation]);
+      },[loginData.navigation, loginData.adminNavigation]);
   return (
     <div>
     <div className="flex items-center justify-center mt-20 bg-white">

@@ -40,6 +40,17 @@ app.get('/items', async (req, res) => {
   }
 });
 
+app.get('/adminItem', async (req, res) => {
+  try {
+    const database = client.db('PracticeReact');
+    const collection = database.collection('AdminUser');
+    const items = await collection.find({}).toArray();
+    res.json(items);
+  } catch (error) {
+    res.status(500).send('Error fetching data from the database');
+  }
+});
+
 app.post('/postItems', async (req, res) => {
   try {
     const newItem = req.body;
