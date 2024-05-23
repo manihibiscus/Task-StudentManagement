@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { getEmail, getFatherName, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
 export const Register = () => {
     const registerData = useSelector((state)=>state.register);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const register = (e) =>{
       dispatch(registerDetails(e));
+      if(registerData.regStatus){
+      navigate("/login")
+      }
     }
 
   return (

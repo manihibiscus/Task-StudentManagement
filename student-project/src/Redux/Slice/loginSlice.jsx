@@ -97,7 +97,7 @@ const loginSlice = createSlice({
                     state.password="";
                     state.navigation=false;
                     state.adminNavigation=true;
-                    sessionStorage.setItem('adminLogged', JSON.stringify(state.adminNavigation));               
+                    sessionStorage.setItem('adminLogged', JSON.stringify(true));               
                  }
                 else{
                     alert("Invalid User");
@@ -115,9 +115,13 @@ const loginSlice = createSlice({
         fetchAdminData:(state, action)=>{
             state.adminUser=action.payload;
             console.log(state.adminUser[0].adminUSerId)
+        },
+        logout:(state)=>{
+            state.adminNavigation=false
+            sessionStorage.setItem('adminLogged', JSON.stringify(false));
         }
     }
 });
 
-export const {submitData, setPassword, setEmail, fetchLoginData,fetchAdminData} = loginSlice.actions
+export const {submitData, setPassword, setEmail, fetchLoginData,fetchAdminData, logout} = loginSlice.actions
 export default loginSlice.reducer;

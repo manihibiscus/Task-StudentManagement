@@ -16,7 +16,9 @@ const registerSlice = createSlice({
     nameStatus:false,
     fatherNameStatus:false,
     emailStatus:false, 
-    passStatus:false},
+    passStatus:false,
+    regStatus:false
+    },
     },
     reducers:{
         getName:(state,action)=>{
@@ -89,7 +91,6 @@ const registerSlice = createSlice({
             else{
                 state.errors.pass="";
                 state.errors.passStatus=true;
-
             }
         }
         },
@@ -103,7 +104,7 @@ const registerSlice = createSlice({
                     password: state.password,
                 };
                 console.log(detail);
-    
+                
                 axios.post('http://localhost:3000/postItems', detail)
                     .then(response => {
                         alert(response.data);
@@ -116,7 +117,6 @@ const registerSlice = createSlice({
                         state.fatherName=""
                         state.emailId=""
                         state.password=""
-                    
             }
             else{
                 alert("Enter all the Fileds");
