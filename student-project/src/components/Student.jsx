@@ -5,55 +5,55 @@ import { deleteStudentData, updateStudentData } from "../Redux/Slice/studentDeta
 
 export const Student = () => {
     const studentDetails = useSelector((state) => state.login.loginUser);
-    const upData = useSelector(state=>state.studentUpdateDelete);
+    const upData = useSelector(state => state.studentUpdateDelete);
     const dispatch = useDispatch();
     const [editId, setEditId] = useState(null);
-    const [editedData, setEditedData] = useState({ id:"", studentName: "", fatherName: "", userId: "" });
+    const [editedData, setEditedData] = useState({ id: "", studentName: "", fatherName: "", userId: "" });
 
     useEffect(() => {
         dispatch(fetchData());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[upData.updateData, upData.deleteId]);
+    }, [upData.updateData, upData.deleteId, dispatch]);
+
     const handleEditClick = (student) => {
         setEditId(student._id);
-        setEditedData({ id:student._id, studentName: student.studentName, fatherName: student.fatherName, userId: student.userId });
+        setEditedData({ id: student._id, studentName: student.studentName, fatherName: student.fatherName, userId: student.userId });
     };
 
     const handleSaveClick = () => {
         dispatch(updateStudentData(editedData));
-        // console.log(editedData);
         dispatch(fetchData());
         setEditId(null);
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEditedData({...editedData, [name]: value });
-    };
-    const handleCancleClick = () =>{
-        setEditId(null)
+        setEditedData({ ...editedData, [name]: value });
     };
 
-    const handleDeleteClick = (student) =>{
-        console.log(student._id);
+    const handleCancelClick = () => {
+        setEditId(null);
+    };
+
+    const handleDeleteClick = (student) => {
         dispatch(deleteStudentData(student._id));
         dispatch(fetchData());
-    }
+    };
+
     return (
-        <div className="flex justify-center">
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
+        <div className="container mx-auto p-4">
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead className="bg-blue-600 text-white">
                     <tr>
-                        <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-widest">Name</th>
-                        <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-widest">Father Name</th>
-                        <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-widest">Email</th>
-                        <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-widest">Edit</th>
-                        <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-widest">Delete</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Name</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Father Name</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Email</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Edit</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Delete</th>
                     </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-200">
                     {studentDetails && studentDetails.map((student) => (
-                        <tr key={student._id}>
+                        <tr key={student._id} className="hover:bg-gray-100">
                             <td className="px-6 py-4">
                                 {editId === student._id ? (
                                     <input
@@ -61,7 +61,7 @@ export const Student = () => {
                                         name="studentName"
                                         value={editedData.studentName}
                                         onChange={handleInputChange}
-                                        className="border border-gray-300 p-2"
+                                        className="border border-gray-300 p-2 rounded"
                                     />
                                 ) : (
                                     student.studentName
@@ -74,7 +74,7 @@ export const Student = () => {
                                         name="fatherName"
                                         value={editedData.fatherName}
                                         onChange={handleInputChange}
-                                        className="border border-gray-300 p-2"
+                                        className="border border-gray-300 p-2 rounded"
                                     />
                                 ) : (
                                     student.fatherName
@@ -87,7 +87,7 @@ export const Student = () => {
                                         name="userId"
                                         value={editedData.userId}
                                         onChange={handleInputChange}
-                                        className="border border-gray-300 p-2"
+                                        className="border border-gray-300 p-2 rounded"
                                     />
                                 ) : (
                                     student.userId
@@ -96,35 +96,32 @@ export const Student = () => {
                             <td className="px-6 py-4">
                                 {editId === student._id ? (
                                     <>
-                                    <button
-                                        onClick={handleSaveClick}
-                                        className="bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-                                    >
-                                        Save
-                                    </button>
-                                    <button
-                                        onClick={handleCancleClick}
-                                        className="bg-red-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-                                    >
-                                        Cancel
-                                    </button>
-
+                                        <button
+                                            onClick={handleSaveClick}
+                                            className="bg-green-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 mr-2"
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            onClick={handleCancelClick}
+                                            className="bg-gray-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                        >
+                                            Cancel
+                                        </button>
                                     </>
-                                    
-                                    
                                 ) : (
                                     <button
                                         onClick={() => handleEditClick(student)}
-                                        className="bg-yellow-200 text-pink-600 font-bold py-2 px-4 rounded-full shadow-lg hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                                        className="bg-yellow-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300"
                                     >
                                         Edit
                                     </button>
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                <button 
-                                className="bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
-                                onClick={()=>handleDeleteClick(student)}
+                                <button
+                                    className="bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                                    onClick={() => handleDeleteClick(student)}
                                 >
                                     Delete
                                 </button>

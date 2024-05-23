@@ -12,7 +12,7 @@ export const Login = () => {
             navigate('/');
         }
         else if(loginData.adminNavigation){
-          navigate('/adminpage')
+          navigate('/adminpage');
         }
       // eslint-disable-next-line react-hooks/exhaustive-deps
       },[loginData.navigation, loginData.adminNavigation]);

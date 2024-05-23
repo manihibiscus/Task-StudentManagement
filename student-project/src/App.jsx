@@ -11,6 +11,8 @@ import store from './Redux/Store'
 import { Register } from './components/Register'
 // import { AdminPage } from './components/AdminPage'
 import { Student } from './components/Student'
+import { AdminPage } from './components/AdminPage'
+import { Attendence } from './components/Attendence'
 function App() {
 
   return (
@@ -24,7 +26,10 @@ function App() {
      <Route path="/contact" element={<Contact />}/>
      <Route path="/login" element={<Login />}/>
      <Route path="/register" element={<Register />}/>
-     <Route path='/adminpage' element={<Student />} />
+     <Route path='/adminpage' element={<AdminPage />} />
+     <Route path='/studentdetails' element={<Student />} />
+     <Route path='/attendence' element={<Attendence />} />
+
      </Routes>
      </Provider>
      </BrowserRouter>
