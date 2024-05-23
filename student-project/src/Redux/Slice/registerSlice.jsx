@@ -16,7 +16,7 @@ const registerSlice = createSlice({
     nameStatus:false,
     fatherNameStatus:false,
     emailStatus:false, 
-    passStatus:false}
+    passStatus:false},
     },
     reducers:{
         getName:(state,action)=>{
@@ -110,6 +110,7 @@ const registerSlice = createSlice({
                     })
                     .catch(error => {
                         console.error('Error:', error);
+                        alert("Error occured");
                     });
                         state.studentName=""
                         state.fatherName=""

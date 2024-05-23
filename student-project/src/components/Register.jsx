@@ -5,12 +5,17 @@ import { getEmail, getFatherName, getName, getPassword, registerDetails } from "
 export const Register = () => {
     const registerData = useSelector((state)=>state.register);
     const dispatch = useDispatch();
+
+    const register = (e) =>{
+      dispatch(registerDetails(e));
+    }
+
   return (
     <div>
         <div className="flex items-center justify-center mt-6 bg-white">
         <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg border-2 border-gray-400">
           <h1 className="text-center font-semibold text-2xl text-gray-800">Register</h1>
-          <form className="space-y-4" onSubmit={(e)=>dispatch(registerDetails(e))}>
+          <form className="space-y-4" onSubmit={(e)=>register(e)}>
             <div className="flex flex-col">
               <label htmlFor="email" className="text-lg font-medium text-gray-700">Name:</label>
               <input 
