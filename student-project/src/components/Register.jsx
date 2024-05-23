@@ -7,7 +7,7 @@ export const Register = () => {
     const dispatch = useDispatch();
   return (
     <div>
-        <div className="flex items-center justify-center mt-20 bg-white">
+        <div className="flex items-center justify-center mt-6 bg-white">
         <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg border-2 border-gray-400">
           <h1 className="text-center font-semibold text-2xl text-gray-800">Register</h1>
           <form className="space-y-4" onSubmit={(e)=>dispatch(registerDetails(e))}>

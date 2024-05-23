@@ -106,15 +106,16 @@ const registerSlice = createSlice({
     
                 axios.post('http://localhost:3000/postItems', detail)
                     .then(response => {
-                        console.log('Response:', response);
+                        alert(response.data);
                     })
                     .catch(error => {
                         console.error('Error:', error);
                     });
-                    state.studentName=""
-                    state.fatherName=""
-                    state.emailId=""
-                    state.password=""
+                        state.studentName=""
+                        state.fatherName=""
+                        state.emailId=""
+                        state.password=""
+                    
             }
             else{
                 alert("Enter all the Fileds");

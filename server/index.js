@@ -53,6 +53,8 @@ app.get('/adminItem', async (req, res) => {
   }
 });
 
+// Post
+
 app.post('/postItems', async (req, res) => {
   try {
     const newItem = req.body;
@@ -60,42 +62,58 @@ app.post('/postItems', async (req, res) => {
     const database = client.db('PracticeReact');
     const collection = database.collection('LoginUsers');
     const result = await collection.insertOne(newItem);
-    res.status(201).json(result);
+    // console.log(res.status(201).json(result));
+    res.send("Registered Successfully!")
   } catch (error) {
     res.status(500).send('Error inserting data into the database');
   }
 });
 
+// Update
 
-app.patch('/updateData/:id', multer().none(), (request, response) => {
-  const id = request.params.id;
-  console.log(id);
-  console.log(request.body);
-  const updatedStudentName = request.body.studentName;
-  const updatedFatherName = request.body.fatherName;
-  const updatedEmail = request.body.userId;
+app.patch('/updateData/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
 
-  // console.log(updatedName);
+    const db = client.db('PracticeReact');
+    const result = await db.collection('LoginUsers').updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updateData }
+    );
 
-  // Update the data in the database using the provided id
-  const database = client.db('PracticeReact');
-  database.collection("LoginUsers").updateOne(
-    { _id: new ObjectId(id) },
-    {
-      $set: {
-        studentName: updatedStudentName,
-        fatherName: updatedFatherName,
-        userId: updatedEmail
-      }
-    },
-    (error, result) => {
-      if (error) {
-        response.status(500).json({ error: "Update failed" });
-      } else {
-        response.json("Updated Successfully");
-      }
+    if (result.matchedCount === 0) {
+      return res.status(404).send('Data not found');
     }
-  );
+
+    res.status(200).send('Data updated successfully');
+  } catch (error) {
+    res.status(500).send('Error updating data in the database');
+  }
+});
+
+// app.delete('/deleteData',(request,response)=>{
+//   const database = client.db('PracticeReact');
+//   database.collection("LoginUsers").deleteOne({
+//       id:request.query.id
+//   });
+//   response.send("Deleted Successfully!")
+// });
+
+// Delete
+app.delete('/deleteData/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    // console.log(req.params);
+    const db = client.db('PracticeReact');
+    const result = await db.collection('LoginUsers').deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).send('Data not found');
+    }
+    res.status(200).send('Data deleted successfully');
+  } catch (error) {
+    res.status(500).send('Error deleting data from the database');
+  }
 });
 
 app.listen(port, () => {

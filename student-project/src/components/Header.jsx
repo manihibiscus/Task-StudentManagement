@@ -4,25 +4,32 @@ import {faSchool, faBars } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clickMenu } from "../Redux/Slice/menuSlice";
+import { useEffect } from "react";
 export const Header = () => {
     const data=useSelector((state)=>state.menu);
     const loginData = useSelector(state=>state.login)
     const dispatch= useDispatch();
     const adminLogged = sessionStorage.getItem('adminLogged');
     const boolValue = adminLogged === null ? null : JSON.parse(adminLogged);
+
+    useEffect(()=>{
+        if(loginData.adminNavigation == false){
+            sessionStorage.setItem('adminLogged', JSON.stringify(loginData.adminNavigation));               
+        }
+    },[loginData.adminNavigation])
   return (
     <>
-    <nav className="p-3 flex bg-pink-200 justify-between item-center">
+    <nav className="p-3 flex bg-blue-200 justify-between item-center">
         <a href="" id="brand" className="flex gap-4 item-center">
             <span><FontAwesomeIcon className="w-[25px] h-[25px] text-purple-500" icon={faSchool} /></span>
             <span className="text-xl font-semibold">Student Management</span>
         </a>
             {!boolValue && (
                 <div id="nav-menu" className="hidden md:flex gap-12 text-lg">
-                    <a className="font-medium hover:text-blue-500"><Link to="/home">Home</Link></a>
-                    <a className="font-medium hover:text-blue-500"><Link to="/about">About Us</Link></a>
-                    <a className="font-medium hover:text-blue-500"><Link to="/contact">Contact Us</Link></a>
-                    <a className="font-medium hover:text-blue-500"><Link to="/login">Login</Link></a>
+                    <a className="font-medium hover:bg-blue-400 px-2 py-1 hover:text-white rounded-md"><Link to="/home">Home</Link></a>
+                    <a className="font-medium hover:bg-blue-400 px-2 py-1 hover:text-white rounded-md"><Link to="/about">About Us</Link></a>
+                    <a className="font-medium hover:bg-blue-400 px-2 py-1 hover:text-white rounded-md"><Link to="/contact">Contact Us</Link></a>
+                    <a className="font-medium hover:bg-blue-400 px-2 py-1 hover:text-white rounded-md"><Link to="/login">Login</Link></a>
                 </div>
             )}
             {boolValue && (

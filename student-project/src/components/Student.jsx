@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../Redux/Slice/loginSlice";
-import { updateStudentData } from "../Redux/Slice/studentDetailsSlice";
+import { deleteStudentData, updateStudentData } from "../Redux/Slice/studentDetailsSlice";
 
 export const Student = () => {
     const studentDetails = useSelector((state) => state.login.loginUser);
@@ -12,16 +12,14 @@ export const Student = () => {
 
     useEffect(() => {
         dispatch(fetchData());
-    },[upData.updateData]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[upData.updateData, upData.deleteId]);
     const handleEditClick = (student) => {
         setEditId(student._id);
         setEditedData({ id:student._id, studentName: student.studentName, fatherName: student.fatherName, userId: student.userId });
     };
 
     const handleSaveClick = () => {
-        // Dispatch an action to update the data in the Redux store and/or backend
-        // For example: dispatch(updateStudent(editedData));
         dispatch(updateStudentData(editedData));
         // console.log(editedData);
         dispatch(fetchData());
@@ -34,6 +32,12 @@ export const Student = () => {
     };
     const handleCancleClick = () =>{
         setEditId(null)
+    };
+
+    const handleDeleteClick = (student) =>{
+        console.log(student._id);
+        dispatch(deleteStudentData(student._id));
+        dispatch(fetchData());
     }
     return (
         <div className="flex justify-center">
@@ -118,7 +122,10 @@ export const Student = () => {
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                <button className="bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
+                                <button 
+                                className="bg-red-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                                onClick={()=>handleDeleteClick(student)}
+                                >
                                     Delete
                                 </button>
                             </td>
