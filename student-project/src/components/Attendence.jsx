@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { fetchData } from "../Redux/Slice/loginSlice";
+import { submitStatus } from "../Redux/Slice/studentDetailsSlice";
 
 export const Attendence = () => {
   const data = useSelector((state) => state.login.loginUser);
+  const stu = useSelector(state=> state.studentUpdateDelete);
   const dispatch = useDispatch();
   const date = new Date();
   const [value, setValue] = useState([]);
   const [attendenceData, setAttendanceData] = useState([]);
   const [status, setStatus] = useState(true);
-  const [submit, setSubmit] = useState(false);
+//   const [submit, setSubmit] = useState(false);
   const [choosed, setChoose] = useState(false);
   const [dateWise, setDateWise] = useState([]);
 
@@ -26,7 +28,7 @@ export const Attendence = () => {
     };
 
     attendenceData();
-  }, [submit]);
+  }, [stu.submit]);
 
   useEffect(() => {
     var today = date.toISOString().split("T")[0];
@@ -38,7 +40,7 @@ export const Attendence = () => {
         setStatus(false);
       }
     }
-  }, [submit, attendenceData]);
+  }, [stu.submit, attendenceData]);
 
   const handleRadioChange = (id, name, attendData) => {
     const index = value.findIndex((item) => item.studentId === id);
@@ -61,8 +63,6 @@ export const Attendence = () => {
   };
 
   const handleSubmit = () => {
-    setSubmit(true);
-    console.log(value);
     axios
       .post("http://localhost:3000/postattendence", value)
       .then((response) => {
@@ -72,7 +72,11 @@ export const Attendence = () => {
         console.error("Error:", error);
         alert("Error occured");
       });
+
+      dispatch(submitStatus());
   };
+
+
   const choose = (value) => {
     if (value === "Entry") {
       setChoose(false);
@@ -84,8 +88,6 @@ export const Attendence = () => {
     const dateWissAtt = attendenceData.filter((d) => {
       return d.date === getDate;
     });
-    // console.log("DateWIse");
-    // console.log(dateWissAtt);
     setDateWise(dateWissAtt);
   };
   return (
