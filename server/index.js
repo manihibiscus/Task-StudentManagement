@@ -53,6 +53,17 @@ app.get('/adminItem', async (req, res) => {
   }
 });
 
+app.get('/getattendence', async (req, res) => {
+  try {
+    const database = client.db('PracticeReact');
+    const collection = database.collection('StudentAttendence');
+    const items = await collection.find({}).toArray();
+    res.json(items);
+  } catch (error) {
+    res.status(500).send('Error fetching data from the database');
+  }
+});
+
 // Post
 
 app.post('/postItems', async (req, res) => {
@@ -66,6 +77,21 @@ app.post('/postItems', async (req, res) => {
     res.send("Registered Successfully!")
   } catch (error) {
     res.status(500).send('Error inserting data into the database');
+  }
+});
+
+
+
+app.post('/postattendence', async (req, res) => {
+  try {
+    const attendanceData = req.body;
+    const db = client.db('PracticeReact');
+    const result = await db.collection('StudentAttendence').insertMany(attendanceData);
+    console.log(`${result.insertedCount} documents inserted`);
+    res.status(201).send('Attendance data saved successfully');
+  } catch (error) {
+    console.error('Error saving attendance data:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 

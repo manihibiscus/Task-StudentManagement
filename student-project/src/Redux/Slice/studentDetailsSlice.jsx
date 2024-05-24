@@ -3,7 +3,7 @@ import axios from "axios";
 
 const studentDetailsSlice = createSlice({
     name:"studentDetailsSlice",
-    initialState:{updateData:[], deleteId:""},
+    initialState:{updateData:[], deleteId:"", studentAttendence:false, attendData:[]},
     reducers:{
         updateStudentData:(state, action)=>{
             state.updateData=action.payload
@@ -26,9 +26,22 @@ const studentDetailsSlice = createSlice({
             .catch(error => {
                 console.error('Error:', error);
             });
+        },
+        attendence:(state, actions)=>{
+            state.attendData=actions.payload;
+            // const date = new Date();
+            // var today = date.toISOString().split("T")[0];
+            // const available=actions.payload.find((b)=>{
+            // return b.date===today;
+            // });
+            // if(available){
+            //     console.log(available);
+            // }
+            console.log("slice");
+            console.log(state.attendData);
         }
     }
 });
 
-export const {updateStudentData, deleteStudentData} = studentDetailsSlice.actions;
+export const {updateStudentData, deleteStudentData, attendence} = studentDetailsSlice.actions;
 export default studentDetailsSlice.reducer;
