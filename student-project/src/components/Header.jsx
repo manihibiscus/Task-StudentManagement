@@ -12,8 +12,6 @@ export const Header = () => {
     const dispatch= useDispatch();
     const logged = sessionStorage.getItem('adminLogged');
     var boolValue = logged === null ? null : logged;
-    console.log("Boolean Value");
-    console.log(boolValue);
     const [value, setValue] = useState(false);
     useEffect(()=>{
         if(boolValue == "true"){
@@ -28,7 +26,7 @@ export const Header = () => {
     <nav className="p-3 flex bg-white justify-between item-center border-b-2 border-blue-100 shadow-bottom">
         <a href="" id="brand" className="flex gap-4 item-center">
             {/* <FontAwesomeIcon onClick={(e)=>dispatch(adminMenu(e))} className={`w-[20px] h-[20px] ${boolValue == "true" ? 'sm:flex' : 'hidden'}`}  icon={faBars} /> */}
-            <span><FontAwesomeIcon className="w-[25px] h-[25px] text-purple-500" icon={faSchoolCircleCheck} /></span>
+            <span><FontAwesomeIcon className="w-[25px] h-[25px] text-pink-500" icon={faSchoolCircleCheck} /></span>
             <span className="text-xl font-semibold">Student Management</span>
         </a>
             {!value && (
