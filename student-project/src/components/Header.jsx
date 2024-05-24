@@ -22,7 +22,7 @@ export const Header = () => {
         else if(boolValue == "false"){
             setValue(false)
         }
-    },[loginData])
+    },[loginData.adminNavigation])
   return (
     <>
     <nav className="p-3 flex bg-white justify-between item-center border-b-2 border-blue-100 shadow-bottom">
