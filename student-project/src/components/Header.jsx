@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faSchoolCircleCheck, faBars } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { adminMenu, clickMenu } from "../Redux/Slice/menuSlice";
+import {clickMenu } from "../Redux/Slice/menuSlice";
 import { useEffect, useState } from "react";
 import { logout } from "../Redux/Slice/loginSlice";
 export const Header = () => {
@@ -40,7 +40,7 @@ export const Header = () => {
                 <div id="nav-menu" className="hidden md:flex gap-12 text-lg">
                     {/* <a className="font-medium hover:text-blue-500"><Link to="/adminpage">Home</Link></a> */}
                     <a className="font-medium hover:text-blue-500"><Link to="/studentdetails">Student Details</Link></a>
-                    <a className="font-medium hover:text-blue-500"><Link to="/Attendence">Attendence</Link></a>
+                    <a className="font-medium hover:text-blue-500"><Link to="/attendence">Attendence</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
                 </div>
             )}
@@ -55,7 +55,7 @@ export const Header = () => {
     {value && (
     <div className={`absolute right-1 bg-white w-[200px] text-lg rounded-md ${data.menuToggle ? 'visible' : 'invisible'} `}>
         <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" ><Link to="/studentdetails" >Student Details</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="" >Attendence</Link></a>
+        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/attendance" >Attendence</Link></a>
         <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
     </div>)}
     {/* {value && (

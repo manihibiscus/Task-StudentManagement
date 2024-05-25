@@ -11,6 +11,8 @@ import { Register } from './components/Register'
 // import { AdminPage } from './components/AdminPage'
 import { Student } from './components/Student'
 // import { AdminPage } from './components/AdminPage'
+// import { AttendStudent } from './components/AttendStudent'
+// import { Attendence } from './components/Attendence'
 import { Attendence } from './components/Attendence'
 function App() {
 

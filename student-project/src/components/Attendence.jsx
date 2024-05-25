@@ -26,21 +26,21 @@ export const Attendence = () => {
         console.error("Error fetching attendance data:", error);
       }
     };
-
     attendenceData();
-  }, [stu.submit]);
+    checking();
+  }, [stu.submit, attendenceData]);
 
-  useEffect(() => {
-    var today = date.toISOString().split("T")[0];
+  const checking = ()=>{
+    const today = date.toISOString().split("T")[0];
     if (attendenceData.length > 0) {
       const daily = attendenceData.find((c) => {
         return c.date === today;
       });
-      if (daily.date === today) {
+      if (daily) {
         setStatus(false);
       }
     }
-  }, [stu.submit, attendenceData]);
+  }
 
   const handleRadioChange = (id, name, attendData) => {
     const index = value.findIndex((item) => item.studentId === id);
