@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { getConfrimPassword, getEmail, getFatherName, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
+import { getConfrimPassword, getDoB, getEmail, getFatherName, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
 export const Register = () => {
     const registerData = useSelector((state)=>state.register);
     const dispatch = useDispatch();
@@ -40,6 +40,17 @@ export const Register = () => {
                 onChange={(e)=>dispatch(getFatherName(e.target.value))}
                 />
               {registerData.errors.fName && <span className="text-red-500 text-sm mt-1">{registerData.errors.fName}</span>}
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="dob" className="text-lg font-medium text-gray-700">Date of Birth:</label>
+              <input 
+                type="date" 
+                value={registerData.dateOfBirth}
+                className="mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" 
+                placeholder="Enter your date of birth" 
+                onChange={(e) => dispatch(getDoB(e.target.value))}
+              />
+              {registerData.errors.dob && <span className="text-red-500 text-sm mt-1">{registerData.errors.dob}</span>}
             </div>
             <div className="flex flex-col">
               <label htmlFor="email" className="text-lg font-medium text-gray-700">Email:</label>
