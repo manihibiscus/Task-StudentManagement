@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { getEmail, getFatherName, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
+import { getConfrimPassword, getEmail, getFatherName, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
 export const Register = () => {
     const registerData = useSelector((state)=>state.register);
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export const Register = () => {
           <h1 className="text-center font-semibold text-2xl text-gray-800">Register</h1>
           <form className="space-y-4" onSubmit={(e)=>register(e)}>
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-medium text-gray-700">Name:</label>
+              <label htmlFor="stdName" className="text-lg font-medium text-gray-700">Name:</label>
               <input 
                 type="text" 
                 value={registerData.studentName}
@@ -31,12 +31,12 @@ export const Register = () => {
               {registerData.errors.studName && <span className="text-red-500 text-sm mt-1">{registerData.errors.studName}</span>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-medium text-gray-700">Father Name:</label>
+              <label htmlFor="fatherName" className="text-lg font-medium text-gray-700">Father Name:</label>
               <input 
                 type="text" 
                 value={registerData.fatherName}
                 className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none`} 
-                placeholder="Enter your email" 
+                placeholder="Enter your Father Name" 
                 onChange={(e)=>dispatch(getFatherName(e.target.value))}
                 />
               {registerData.errors.fName && <span className="text-red-500 text-sm mt-1">{registerData.errors.fName}</span>}
@@ -53,14 +53,24 @@ export const Register = () => {
               {registerData.errors.email && <span className="text-red-500 text-sm mt-1">{registerData.errors.email}</span>}
             </div>
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-medium text-gray-700">Password:</label>
+              <label htmlFor="password" className="text-lg font-medium text-gray-700">Password:</label>
               <input 
                 type="text"
                 value={registerData.password} 
                 className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none`} 
-                placeholder="Enter your email" 
+                placeholder="Enter your Password" 
                 onChange={(e)=>dispatch(getPassword(e.target.value))}/>
               {registerData.errors.pass && <span className="text-red-500 text-sm mt-1">{registerData.errors.pass}</span>}
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="confrimPassword" className="text-lg font-medium text-gray-700">Confrim Password:</label>
+              <input 
+                type="text"
+                value={registerData.confrimPassword} 
+                className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none`} 
+                placeholder="Re-Enter your Password" 
+                onChange={(e)=>dispatch(getConfrimPassword(e.target.value))}/>
+              {registerData.errors.conPassword && <span className="text-red-500 text-sm mt-1">{registerData.errors.conPassword}</span>}
             </div>
             <button 
               type="submit" 

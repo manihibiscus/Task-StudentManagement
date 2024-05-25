@@ -8,15 +8,19 @@ const registerSlice = createSlice({
     fatherName:"", 
     emailId:"", 
     password:"", 
+    confrimPassword:"",
     errors: {
     studName:"", 
     fName:"", 
     email:"", 
     pass:"", 
+    conPassword:"",
     nameStatus:false,
     fatherNameStatus:false,
     emailStatus:false, 
     passStatus:false,
+    conPassStatus:false,
+    // confrimPassword:false,
     regStatus:false
     },
     },
@@ -86,7 +90,6 @@ const registerSlice = createSlice({
             if(!passwordRegex){
             state.errors.pass="Password Invalid";
             state.errors.passStatus=false;
-
             }
             else{
                 state.errors.pass="";
@@ -94,14 +97,43 @@ const registerSlice = createSlice({
             }
         }
         },
+        getConfrimPassword:(state, action)=>{
+            state.confrimPassword=action.payload;
+            // if(state.confrimPassword !== state.password){
+            //     state.errors.conPassword="Your Password Not Match";
+            // }
+            // else{
+            //     state.errors.conPassword="";
+            //     state.conPassStatus=true;
+            // }
+            if(!state.confrimPassword){
+                state.errors.conPassword="Please Re-Enter the Password";
+                state.errors.conPassStatus=false;
+            }
+            else{
+                state.errors.conPassword="";
+            }
+            if(state.confrimPassword){
+                if(state.confrimPassword != state.password){
+                state.errors.conPassword="Your Password Not Match";
+                state.errors.conPassStatus=false;
+                }
+                else{
+                    state.errors.conPassword="";
+                    state.errors.conPassStatus=true;
+                }
+            }
+        },
         registerDetails:(state, action)=>{
             action.payload.preventDefault();
-            if(state.errors.nameStatus && state.errors.fatherNameStatus && state.errors.emailStatus && state.errors.passStatus){
+            if(state.errors.nameStatus && state.errors.fatherNameStatus && state.errors.emailStatus && state.errors.passStatus
+                && state.errors.conPassStatus
+            ){
                 const detail = {
                     studentName:state.studentName,
                     fatherName:state.fatherName,
                     userId: state.emailId,
-                    password: state.password,
+                    password: state.confrimPassword,
                 };
                 console.log(detail);
                 
@@ -117,6 +149,7 @@ const registerSlice = createSlice({
                         state.fatherName=""
                         state.emailId=""
                         state.password=""
+                        state.confrimPassword=""
             }
             else{
                 alert("Enter all the Fileds");
@@ -125,5 +158,5 @@ const registerSlice = createSlice({
     }
 });
 
-export const {getName,getFatherName,getEmail, getPassword, registerDetails} = registerSlice.actions;
+export const {getName,getFatherName,getEmail, getPassword, getConfrimPassword, registerDetails} = registerSlice.actions;
 export default registerSlice.reducer;
