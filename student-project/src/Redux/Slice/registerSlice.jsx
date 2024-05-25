@@ -10,6 +10,7 @@ const registerSlice = createSlice({
     password:"", 
     confrimPassword:"",
     dateOfBirth:"",
+    gender:"",
     errors: {
     studName:"", 
     fName:"", 
@@ -17,13 +18,15 @@ const registerSlice = createSlice({
     pass:"", 
     conPassword:"",
     dob :"",
+    gen:"",
     nameStatus:false,
     fatherNameStatus:false,
     emailStatus:false, 
     passStatus:false,
     conPassStatus:false,
     dobStatus:false,
-    regStatus:false
+    regStatus:false,
+    genderStatus:false
     },
     },
     reducers:{
@@ -139,11 +142,27 @@ const registerSlice = createSlice({
             if(state.dateOfBirth){
                 state.errors.dob="";
                 state.errors.dobStatus=true;
-            }        },
+            }        
+        },
+        getGender:(state,action)=>{
+            state.gender=action.payload
+            if(!state.gender){
+                state.errors.gen="Please Choose gender"
+                state.errors.genderStatus=false;
+            }
+            else
+            {
+            state.errors.gen=""; 
+            }
+            if(state.gender){
+                state.errors.gen="";
+                state.errors.genderStatus=true;
+            }  
+        },
         registerDetails:(state, action)=>{
             action.payload.preventDefault();
             if(state.errors.nameStatus && state.errors.fatherNameStatus && state.errors.emailStatus && state.errors.passStatus
-                && state.errors.conPassStatus && state.errors.dobStatus
+                && state.errors.conPassStatus && state.errors.dobStatus && state.errors.genderStatus
             ){
                 const detail = {
                     studentName:state.studentName,
@@ -151,6 +170,7 @@ const registerSlice = createSlice({
                     dateOfBirth:state.dateOfBirth,
                     userId: state.emailId,
                     password: state.confrimPassword,
+                    gender:state.gender
                 };
                 console.log(detail);
                 
@@ -176,5 +196,5 @@ const registerSlice = createSlice({
     }
 });
 
-export const {getName,getFatherName,getEmail, getPassword, getConfrimPassword, registerDetails, getDoB} = registerSlice.actions;
+export const {getName,getFatherName,getEmail, getPassword, getConfrimPassword, registerDetails, getDoB, getGender} = registerSlice.actions;
 export default registerSlice.reducer;

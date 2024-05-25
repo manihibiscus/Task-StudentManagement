@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { getConfrimPassword, getDoB, getEmail, getFatherName, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
+import { getConfrimPassword, getDoB, getEmail, getFatherName, getGender, getName, getPassword, registerDetails } from "../Redux/Slice/registerSlice";
 export const Register = () => {
     const registerData = useSelector((state)=>state.register);
     const dispatch = useDispatch();
@@ -41,6 +41,7 @@ export const Register = () => {
                 />
               {registerData.errors.fName && <span className="text-red-500 text-sm mt-1">{registerData.errors.fName}</span>}
             </div>
+            {/* DoB */}
             <div className="flex flex-col">
               <label htmlFor="dob" className="text-lg font-medium text-gray-700">Date of Birth:</label>
               <input 
@@ -52,6 +53,36 @@ export const Register = () => {
               />
               {registerData.errors.dob && <span className="text-red-500 text-sm mt-1">{registerData.errors.dob}</span>}
             </div>
+            {/* Gender */}
+            <div className="flex flex-col mt-4">
+  <label className="text-lg font-medium text-gray-700">Gender:</label>
+  <div className="mt-1 flex items-center">
+    <input 
+      type="radio" 
+      id="male" 
+      name="gender" 
+      value="male" 
+      checked={registerData.gender === 'male'}
+      className="mr-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      onChange={(e) => dispatch(getGender(e.target.value))}
+    />
+    <label htmlFor="male" className="text-gray-700">Male</label>
+  </div>
+  <div className="mt-1 flex items-center">
+    <input 
+      type="radio" 
+      id="female" 
+      name="gender" 
+      value="female" 
+      checked={registerData.gender === 'female'}
+      className="mr-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      onChange={(e) => dispatch(getGender(e.target.value))}
+    />
+    <label htmlFor="female" className="text-gray-700">Female</label>
+  </div>
+  {registerData.errors.gen && <span className="text-red-500 text-sm mt-1">{registerData.errors.gen}</span>}
+</div>
+            {/* Email */}
             <div className="flex flex-col">
               <label htmlFor="email" className="text-lg font-medium text-gray-700">Email:</label>
               <input 
