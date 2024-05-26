@@ -172,6 +172,8 @@ const registerSlice = createSlice({
                     password: state.confrimPassword,
                     gender:state.gender
                 };
+                state.regStatus=true;
+
                 console.log(detail);
                 
                 axios.post('http://localhost:3000/postItems', detail)

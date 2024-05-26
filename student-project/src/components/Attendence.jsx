@@ -167,7 +167,7 @@ export const Attendence = () => {
                             type="radio"
                             name={`attendance-${detail._id}`}
                             value="leave"
-                            className="form-radio text-blue-600"
+                            className="form-radio h-5 w-5 text-blue-600"
                             onChange={() =>
                               handleRadioChange(
                                 detail._id,
@@ -182,7 +182,7 @@ export const Attendence = () => {
                             type="radio"
                             name={`attendance-${detail._id}`}
                             value="present"
-                            className="form-radio text-blue-600"
+                            className="form-radio h-5 w-5 text-blue-600"
                             onChange={() =>
                               handleRadioChange(
                                 detail._id,
@@ -197,7 +197,7 @@ export const Attendence = () => {
                             type="radio"
                             name={`attendance-${detail._id}`}
                             value="absent"
-                            className="form-radio text-blue-600"
+                            className="form-radio h-5 w-5 text-blue-600"
                             onChange={() =>
                               handleRadioChange(
                                 detail._id,
