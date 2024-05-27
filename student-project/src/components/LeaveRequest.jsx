@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { submitLeaveForm } from "../Redux/Slice/leaveFormSlice";
 import { useState } from "react";
+import axios from "axios";
 // import { useEffect } from "react";
 
 export const LeaveRequest = () => {
@@ -24,8 +25,27 @@ const leaveSubmit = (e) =>{
         status:"Pending"
     };
     dispatch(submitLeaveForm(body));
+
+    var mail={
+        reqStuName:loggedUser.studentName,
+        reqStuEmail:loggedUser.userId,
+        reqStuSubject:subject,
+        reqStuContent:content,
+        mailTO:"pycusmalaus@gmail.com"
+    };
+
+    axios.post('http://localhost:3000/sendmail', mail)
+    .then(response => {
+      alert(response.data);
+    })
+    .catch(error => {
+      alert('Failed to send email');
+      console.error('There was an error sending the email!', error);
+    });
+};
+
     // alert(body.reqStuName);
-}
+
   return (
     <> 
       <form action="" onSubmit={(e)=>leaveSubmit(e)} className="container mx-auto w-full max-w-lg bg-pink-100 p-8 m-3 rounded-md md:w-3/4 lg:w-1/2">

@@ -187,6 +187,39 @@ app.delete('/deleteData/:id', async (req, res) => {
   }
 });
 
+
+// var nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'manikandansidhuraj2001@gmail.com',
+    pass: 'nsbe fopo aavo ohee'
+  }
+});
+
+app.post('/sendmail', async (req, res)=>{
+
+  const { reqStuName, reqStuEmail, reqStuSubject, reqStuContent, mailTO } = req.body;
+  var mailOptions = {
+    from: reqStuEmail,
+    to: mailTO,
+    subject: `${reqStuSubject} - ${reqStuName}`,
+    text: reqStuContent
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send("Sent Successfully");
+    }
+  });
+})
+
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+

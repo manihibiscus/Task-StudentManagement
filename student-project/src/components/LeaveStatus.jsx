@@ -77,7 +77,9 @@ export const LeaveStatus = () => {
                     type="text" 
                     value={filterData.status} 
                     disabled 
-                    className="w-full px-2 py-1 border rounded-md outline-none bg-gray-100 text-center"
+                    className={`w-full px-2 py-1 border rounded-md outline-none bg-gray-100 text-center 
+                    
+                    ${filterData.status==="Accepted" ? 'uppercase bg-green-400 font-bold text-orange-950':'uppercase bg-red-500 font-bold text-white'}`}
                   />
                 </td>
               </tr>
