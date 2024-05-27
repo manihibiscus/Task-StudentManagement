@@ -142,6 +142,27 @@ app.patch('/updateData/:id', async (req, res) => {
   }
 });
 
+app.patch('/updateleavedetails/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateStatus = req.body;
+
+    const db = client.db('PracticeReact');
+    const result = await db.collection('LeaveRequestDetails').updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updateStatus }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send('Data not found');
+    }
+
+    res.status(200).send('Leave Status Updated successfully');
+  } catch (error) {
+    res.status(500).send('Error updating data in the database');
+  }
+});
+
 // app.delete('/deleteData',(request,response)=>{
 //   const database = client.db('PracticeReact');
 //   database.collection("LoginUsers").deleteOne({

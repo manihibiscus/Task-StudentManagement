@@ -16,6 +16,8 @@
   import { Attendence } from './components/Attendence'
 import ProctectRoute from '../ProtectedRouter/Protectroute'
 import { LeaveRequest } from './components/LeaveRequest'
+import { LeaveStatus } from './components/LeaveStatus'
+import { LeaveConfrim } from './components/LeaveConfrim'
   // import ProtectedRoute from '../ProtectedRouter/Protectroute'
   function App() {
 
@@ -35,6 +37,8 @@ import { LeaveRequest } from './components/LeaveRequest'
       <Route path='/studentdetails' element={<Student />} />
       <Route path='/attendence' element={<Attendence />} />
       <Route path='/leaverequest' element={<LeaveRequest />} />
+      <Route path='/leavestatus' element={<LeaveStatus />}/>
+      <Route path='/leaveconfrim' element={<LeaveConfrim />} />
       </Route>
       </Routes>
       </Provider>

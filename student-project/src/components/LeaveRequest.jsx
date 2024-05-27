@@ -9,7 +9,7 @@ export const LeaveRequest = () => {
   const levReqDet = useSelector(state => state.leaveReq);
   const dispatch = useDispatch();
   const [subject, setSubject] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("");   
 //   useEffect(()=>{
 //     dispatch(reqName());
 //   })
@@ -29,7 +29,7 @@ const leaveSubmit = (e) =>{
   return (
     <> 
       <form action="" onSubmit={(e)=>leaveSubmit(e)} className="container mx-auto w-full max-w-lg bg-pink-100 p-8 m-3 rounded-md md:w-3/4 lg:w-1/2">
-        <h1 className="text-2xl font-semibold text-center p-2 m-2">Leave Request Form</h1>
+        <h1 className="text-2xl font-semibold text-center p-2 m-2 text-gray-500">Leave Request Form</h1>
         <div className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="stdName" className="text-lg font-medium text-gray-700">Name:</label>
@@ -70,6 +70,7 @@ const leaveSubmit = (e) =>{
             //   onChange={(e) => dispatch(reqName({ ...levReqDet, content: e.target.value }))}
             onChange={(e) => setContent(e.target.value)}
             required
+            placeholder="Type your Content"
             />
           </div>
           <button 
