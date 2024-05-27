@@ -14,6 +14,8 @@
   // import { AttendStudent } from './components/AttendStudent'
   // import { Attendence } from './components/Attendence'
   import { Attendence } from './components/Attendence'
+import ProctectRoute from '../ProtectedRouter/Protectroute'
+import { LeaveRequest } from './components/LeaveRequest'
   // import ProtectedRoute from '../ProtectedRouter/Protectroute'
   function App() {
 
@@ -27,10 +29,13 @@
       <Route path="/about" element={<About />}/>
       <Route path="/login" element={<Login />}/>
       <Route path="/register" element={<Register />}/>
-      {/* <Route path='/adminpage' element={<AdminPage />} /> */}
+      {/* <Route path='/adminpage' element={<AdminPage />} /> */} 
+
+      <Route element={<ProctectRoute />}>
       <Route path='/studentdetails' element={<Student />} />
       <Route path='/attendence' element={<Attendence />} />
-
+      <Route path='/leaverequest' element={<LeaveRequest />} />
+      </Route>
       </Routes>
       </Provider>
       </BrowserRouter>

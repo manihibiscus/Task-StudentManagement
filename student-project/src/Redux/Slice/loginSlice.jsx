@@ -8,7 +8,7 @@ export const fetchData = () => {
             const response2 = await axios.get("http://localhost:3000/adminItem");
             const data = response.data;
             const data2 = response2.data;
-            console.log(data[0].userId);
+            // console.log(data[0].userId);
             dispatch(fetchLoginData(data));
             dispatch(fetchAdminData(data2));
         } catch (error) {
@@ -24,6 +24,7 @@ const loginSlice = createSlice({
         errors: {email:"", password:"", emailStatus:false, passStatus:false},
         navigation:false,
         adminNavigation:false,
+        studentNavigation:false,
         loginUser:[],
         adminUser:[]
     },
@@ -87,9 +88,19 @@ const loginSlice = createSlice({
                 
                 if(user){
                 alert("Login Successfully!!!");
+                const user = state.loginUser.find((a)=>{
+                    return a.userId===state.email
+                });
+                if(user){
+                    sessionStorage.setItem('loggedUser', JSON.stringify(user));
+                }
+
                 state.email="";
                 state.password="";
                 state.navigation=true;
+                state.studentNavigation=true;
+                sessionStorage.setItem('studentLogged', JSON.stringify("true"));
+
                 }
                 else if(admin){
                     alert("Login Successfully-Admin!!!");
@@ -97,7 +108,7 @@ const loginSlice = createSlice({
                     state.password="";
                     state.navigation=false;
                     state.adminNavigation=true;
-                    sessionStorage.setItem('adminLogged', JSON.stringify(true));               
+                    sessionStorage.setItem('adminLogged', JSON.stringify(true));
                  }
                 else{
                     alert("Invalid User");
@@ -110,15 +121,16 @@ const loginSlice = createSlice({
         },
         fetchLoginData:(state, action)=>{
             state.loginUser=action.payload;
-            console.log("Fetch PRoduct" + state.loginUser);
+            // console.log("Fetch PRoduct" + state.loginUser);
         },
         fetchAdminData:(state, action)=>{
             state.adminUser=action.payload;
-            console.log(state.adminUser[0].adminUSerId)
+            // console.log(state.adminUser[0].adminUSerId)
         },
         logout:(state)=>{
             state.adminNavigation=false
             sessionStorage.setItem('adminLogged', JSON.stringify(false));
+            sessionStorage.clear();
         }
     }
 });

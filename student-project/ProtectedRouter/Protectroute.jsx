@@ -1,23 +1,16 @@
-/* eslint-disable react/prop-types */
-// PrivateRoute.js
-// import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ element: Component, ...rest }) => {
-  const isAuthenticated = sessionStorage.getItem('isLoggedIn') === 'true';
+const authUser = () =>{
+  // sessionStorage.getItem("")
+  const user = {
+    login:true
+  }
+  return user && user.login;
+}
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
-};
+const ProctectRoute = () =>{
+  const isAuth = authUser();
+  return isAuth ? <Outlet /> : <Navigate to = "/" />
+}
 
-export default PrivateRoute;
+export default ProctectRoute;

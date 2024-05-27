@@ -63,6 +63,17 @@ app.get('/getattendence', async (req, res) => {
   }
 });
 
+app.get('/getleaveform', async (req, res) => {
+  try {
+    const database = client.db('PracticeReact');
+    const collection = database.collection('LeaveRequestDetails');
+    const items = await collection.find({}).toArray();
+    res.json(items);
+  } catch (error) {
+    res.status(500).send('Error fetching data from the database');
+  }
+});
+
 // Post
 
 app.post('/postItems', async (req, res) => {
@@ -80,7 +91,7 @@ app.post('/postItems', async (req, res) => {
 });
 
 
-
+// Post Attendence
 app.post('/postattendence', async (req, res) => {
   try {
     const attendanceData = req.body;
@@ -93,6 +104,20 @@ app.post('/postattendence', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+// Post leave Form
+app.post('/postleaveform', async (req, res)=>{
+  try{
+    const leaveFormData = req.body;
+    const database = client.db('PracticeReact');
+    const result = await database.collection('LeaveRequestDetails').insertOne(leaveFormData);
+    res.status(201).send('Posted Leave Form Successfully!');
+  }
+  catch(error){
+    console.error('Error saving attendance data:', error);
+    res.send('Internal Server Error');
+  }
+})
 
 // Update
 

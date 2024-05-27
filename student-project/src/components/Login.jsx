@@ -9,7 +9,7 @@ export const Login = () => {
     useEffect(()=>{
         dispatch(fetchData());
         if(loginData.navigation){
-            navigate('/');
+            navigate('/leaveRequest');
         }
         else if(loginData.adminNavigation){
           navigate('/studentDetails');
