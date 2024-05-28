@@ -18,6 +18,7 @@ import ProctectRoute from '../ProtectedRouter/Protectroute'
 import { LeaveRequest } from './components/LeaveRequest'
 import { LeaveStatus } from './components/LeaveStatus'
 import { LeaveConfrim } from './components/LeaveConfrim'
+import { StudentHome } from './components/StudentHome'
   // import ProtectedRoute from '../ProtectedRouter/Protectroute'
   function App() {
 
@@ -39,6 +40,8 @@ import { LeaveConfrim } from './components/LeaveConfrim'
       <Route path='/leaverequest' element={<LeaveRequest />} />
       <Route path='/leavestatus' element={<LeaveStatus />}/>
       <Route path='/leaveconfrim' element={<LeaveConfrim />} />
+      <Route path='/studenthome' element={<StudentHome />} />
+
       </Route>
       </Routes>
       </Provider>

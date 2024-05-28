@@ -48,11 +48,11 @@ const leaveSubmit = (e) =>{
 
   return (
     <> 
-      <form action="" onSubmit={(e)=>leaveSubmit(e)} className="container mx-auto w-full max-w-lg bg-pink-100 p-8 m-3 rounded-md md:w-3/4 lg:w-1/2">
-        <h1 className="text-2xl font-semibold text-center p-2 m-2 text-gray-500">Leave Request Form</h1>
+      <form action="" onSubmit={(e)=>leaveSubmit(e)} className="container mx-auto w-full max-w-lg border-2 border-pink-600 p-8 m-3 rounded-md md:w-3/4 lg:w-1/2 shadow-lg">
+        <h1 className="text-2xl font-semibold text-center p-2 m-2 text-pink-500">Leave Request Form</h1>
         <div className="space-y-4">
           <div className="flex flex-col">
-            <label htmlFor="stdName" className="text-lg font-medium text-gray-700">Name:</label>
+            <label htmlFor="stdName" className="text-lg font-medium text-pink-700">Name:</label>
             <input 
               type="text" 
               value={loggedUser.studentName}
@@ -61,7 +61,7 @@ const leaveSubmit = (e) =>{
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-lg font-medium text-gray-700">Email:</label>
+            <label htmlFor="email" className="text-lg font-medium text-pink-700">Email:</label>
             <input 
               type="text" 
               value={loggedUser.userId}
@@ -70,7 +70,7 @@ const leaveSubmit = (e) =>{
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="subject" className="text-lg font-medium text-gray-700">Subject:</label>
+            <label htmlFor="subject" className="text-lg font-medium text-pink-700">Subject:</label>
             <input 
               type="text" 
               value={subject}
@@ -81,7 +81,7 @@ const leaveSubmit = (e) =>{
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="content" className="text-lg font-medium text-gray-700">Content:</label>
+            <label htmlFor="content" className="text-lg font-medium text-pink-700">Content:</label>
             <textarea 
               id="formattedContent" 
               value={levReqDet.content} 
@@ -97,7 +97,7 @@ const leaveSubmit = (e) =>{
             type="submit" 
             className="w-full py-2 mt-4 text-lg font-semibold text-white bg-pink-400 rounded-md hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50"
             >
-            Register
+            Submit
           </button>
         </div>
       </form>

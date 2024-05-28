@@ -11,12 +11,14 @@ export const Header = () => {
     const loginData = useSelector(state=>state.login)
     const dispatch= useDispatch();
     const logged = sessionStorage.getItem('adminLogged');
-    var boolValue = logged === null ? null : logged;
+    // var boolValue = logged === null ? null : logged;
+    const boolValue = JSON.parse(logged);
+
     const [value, setValue] = useState(false);
     const [userValue, setUserValue] = useState(false);
     const loggedUserString = sessionStorage.getItem('studentLogged');
-    // const loggedUser = JSON.parse(loggedUserString);
-    var loggedUser = loggedUserString === null ? null : loggedUser;
+    const loggedUser = JSON.parse(loggedUserString);
+    // var loggedUser = loggedUserString === null ? null : loggedUser;
 
     useEffect(()=>{
         if(boolValue == "true"){
@@ -25,14 +27,15 @@ export const Header = () => {
         else if(boolValue == null){
             setValue(false)
         }
-        else if(loggedUser == "true"){
+        if(loggedUser == "true"){
           setUserValue(true)
         }
         else if(loggedUser == null){
           setUserValue(false)
         }
+        // alert(loggedUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[loginData.adminNavigation, loginData.studentNavigation])
+    },[loginData.adminNavigation, loginData.navigation, loginData.studentNavigation, dispatch])
   return (
     <>
     <nav className="p-3 flex bg-white justify-between item-center border-b-2 border-blue-100 shadow-bottom">
@@ -41,7 +44,7 @@ export const Header = () => {
             <span><FontAwesomeIcon className="w-[25px] h-[25px] text-pink-500" icon={faSchoolCircleCheck} /></span>
             <span className="text-xl font-semibold">Student Management</span>
         </a>
-            {!value && !loginData.studentNavigation &&(
+            {!value && !userValue &&(
                 <div id="nav-menu" className="hidden md:flex gap-12 text-lg">
                     <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link to="/home">Home</Link></a>
                     <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link to="/about">About Us</Link></a>
@@ -57,13 +60,13 @@ export const Header = () => {
                     <a className="font-medium hover:text-blue-500"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
                 </div>
             )}
-            {loginData.studentNavigation && !value&& (
+            {userValue && !value&& (
                 <div id="nav-menu" className="hidden md:flex gap-12 text-lg">
                     {/* <a className="font-medium hover:text-blue-500"><Link to="/adminpage">Home</Link></a> */}
+                    <a className="font-medium hover:text-blue-500"><Link to="/studenthome">Home</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link to="/leaverequest">Leave Request</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link to="/leavestatus">Leave Status</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
-
                 </div>
             )}
         <FontAwesomeIcon onClick={()=>dispatch(clickMenu())} className="w-[25px] h-[25px] md:hidden sm:flex"  icon={faBars} />

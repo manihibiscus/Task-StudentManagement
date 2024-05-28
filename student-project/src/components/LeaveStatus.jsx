@@ -16,12 +16,12 @@ export const LeaveStatus = () => {
     if(usdata){
       setFilterLevData(usdata);
     }
-  },[])
+  },[getLevDet])
 
   return (
     <>
     <div className="container mx-auto">
-      <h1 className="text-2xl font-semibold text-center p-2 m-2">Leave Request Form</h1>
+      <h1 className="text-2xl font-semibold text-center p-2 m-2">Leave Status</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
@@ -79,7 +79,7 @@ export const LeaveStatus = () => {
                     disabled 
                     className={`w-full px-2 py-1 border rounded-md outline-none bg-gray-100 text-center 
                     
-                    ${filterData.status==="Accepted" ? 'uppercase bg-green-400 font-bold text-orange-950':'uppercase bg-red-500 font-bold text-white'}`}
+                    ${filterData.status==="Accepted" ? 'uppercase bg-green-400 font-bold text-orange-950' : filterData.status==="Rejected" ? 'uppercase bg-red-500 font-bold text-white' : 'uppercase bg-yellow-500 font-bold text-white'}`}
                   />
                 </td>
               </tr>

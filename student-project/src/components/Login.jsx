@@ -8,12 +8,13 @@ export const Login = () => {
     const navigate = useNavigate();
     useEffect(()=>{
         dispatch(fetchData());
-        if(loginData.navigation){
-            navigate('/leaveRequest');
+        if(loginData.studentNavigation){
+          navigate('/studenthome')
         }
         else if(loginData.adminNavigation){
           navigate('/studentDetails');
         }
+        
       // eslint-disable-next-line react-hooks/exhaustive-deps
       },[loginData.navigation, loginData.adminNavigation]);
   return (

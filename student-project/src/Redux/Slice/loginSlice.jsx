@@ -108,7 +108,7 @@ const loginSlice = createSlice({
                     state.password="";
                     state.navigation=false;
                     state.adminNavigation=true;
-                    sessionStorage.setItem('adminLogged', JSON.stringify(true));
+                    sessionStorage.setItem('adminLogged', JSON.stringify("true"));
                  }
                 else{
                     alert("Invalid User");
@@ -128,8 +128,12 @@ const loginSlice = createSlice({
             // console.log(state.adminUser[0].adminUSerId)
         },
         logout:(state)=>{
-            state.adminNavigation=false
-            sessionStorage.setItem('adminLogged', JSON.stringify(false));
+            state.adminNavigation=false;
+            state.studentNavigation=false;
+            state.navigation=false;
+            sessionStorage.setItem('adminLogged', JSON.stringify("false"));
+            sessionStorage.setItem('adminLogged', JSON.stringify("studentLogged"));
+            sessionStorage.setItem('loggedUser', JSON.stringify(""));
             sessionStorage.clear();
         }
     }
