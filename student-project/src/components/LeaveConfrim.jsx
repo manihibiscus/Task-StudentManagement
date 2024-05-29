@@ -55,7 +55,10 @@ export const LeaveConfrim = () => {
                   Name
                 </th>
                 <th className="py-2 px-4 border-b text-center border-r  text-gray-700">
-                  Email Id
+                  Register Number
+                </th>
+                <th className="py-2 px-4 border-b text-center border-r text-gray-700">
+                  Class
                 </th>
                 <th className="py-2 px-4 border-b text-center border-r text-gray-700">
                   Subject
@@ -76,15 +79,23 @@ export const LeaveConfrim = () => {
                       type="text"
                       value={details.reqStuName}
                       readOnly
-                      className="w-full px-2 py-1 border rounded-md outline-none bg-gray-100 text-center"
+                      className="w-full px-2 py-1 border font-bold text-green-700 rounded-md outline-none bg-gray-100 text-center"
                     />
                   </td>
                   <td className="py-2 px-4 border-b text-gray-900 border-r">
                     <input
                       type="text"
-                      value={details.reqStuEmail}
+                      value={details.reqStuReg}
                       readOnly
-                      className="w-full px-2 py-1 border rounded-md outline-none bg-gray-100 text-center"
+                      className="w-full px-2 py-1 border rounded-md outline-none font-bold text-green-700 bg-gray-100 text-center"
+                    />
+                  </td>
+                  <td className="py-2 px-4 border-b text-gray-900 border-r">
+                    <input
+                      type="text"
+                      value={`${details.reqStuClass} - '${details.reqStuSec}' `}
+                      readOnly
+                      className="w-full px-2 py-1 border rounded-md outline-none font-bold text-green-700 bg-gray-100 text-center"
                     />
                   </td>
                   <td className="py-2 px-4 border-b text-gray-900 border-r">

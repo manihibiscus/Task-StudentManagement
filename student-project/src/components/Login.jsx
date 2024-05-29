@@ -44,18 +44,18 @@ export const Login = () => {
                 value={loginData.email}
                 onChange={(e) => dispatch(setEmail(e.target.value))}
                 className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${loginData.errors.email ? 'border-red-500' : 'border-gray-300'}`} 
-                placeholder="Enter your email" />
+                placeholder="Eg: REG****" />
               {loginData.errors.email && <span className="text-red-500 text-sm mt-1">{loginData.errors.email}</span>}
             </div>
             <div className="flex flex-col">
               <label htmlFor="password" className="text-lg font-medium text-gray-700">Password:</label>
               <input 
-                type="password" 
+                type="text" 
                 id="password" 
                 value={loginData.password}
                 onChange={(e) => dispatch(setPassword(e.target.value))}
                 className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${loginData.errors.password ? 'border-red-500' : 'border-gray-300'}`} 
-                placeholder="Enter your password"
+                placeholder="Eg: YYYY-MM-DD"
               />
               {loginData.errors.password && <span className="text-red-500 text-sm mt-1">{loginData.errors.password}</span>}
             </div>
@@ -64,7 +64,7 @@ export const Login = () => {
               className="w-full py-2 mt-4 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
               Login
             </button>
-            <p className="text-center pt-2">If you are a New User ? <span><Link to='/register' className="text-blue-500 hover:text-blue-900 hover:font-semibold underline">Please Register!</Link></span></p>
+            {/* <p className="text-center pt-2">If you are a New User ? <span><Link to='/register' className="text-blue-500 hover:text-blue-900 hover:font-semibold underline">Please Register!</Link></span></p> */}
           </form>
         </div>
       </div>

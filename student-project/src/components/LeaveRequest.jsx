@@ -19,29 +19,31 @@ const leaveSubmit = (e) =>{
     e.preventDefault();
     var body ={
         reqStuName:loggedUser.studentName,
-        reqStuEmail:loggedUser.userId,
+        reqStuReg:loggedUser.registerNumber,
         reqStuSubject:subject,
         reqStuContent:content,
+        reqStuClass:loggedUser.className,
+        reqStuSec:loggedUser.section,
         status:"Pending"
     };
     dispatch(submitLeaveForm(body));
 
-    var mail={
-        reqStuName:loggedUser.studentName,
-        reqStuEmail:loggedUser.userId,
-        reqStuSubject:subject,
-        reqStuContent:content,
-        mailTO:"pycusmalaus@gmail.com"
-    };
+    // var mail={
+    //     reqStuName:loggedUser.studentName,
+    //     reqStuEmail:loggedUser.userId,
+    //     reqStuSubject:subject,
+    //     reqStuContent:content,
+    //     mailTO:"pycusmalaus@gmail.com"
+    // };
 
-    axios.post('http://localhost:3000/sendmail', mail)
-    .then(response => {
-      alert(response.data);
-    })
-    .catch(error => {
-      alert('Failed to send email');
-      console.error('There was an error sending the email!', error);
-    });
+    // axios.post('http://localhost:3000/sendmail', mail)
+    // .then(response => {
+    //   alert(response.data);
+    // })
+    // .catch(error => {
+    //   alert('Failed to send email');
+    //   console.error('There was an error sending the email!', error);
+    // });
 };
 
     // alert(body.reqStuName);
@@ -61,10 +63,10 @@ const leaveSubmit = (e) =>{
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-lg font-medium text-pink-700">Email:</label>
+            <label htmlFor="email" className="text-lg font-medium text-pink-700">Register Number:</label>
             <input 
               type="text" 
-              value={loggedUser.userId}
+              value={loggedUser.registerNumber}
               className="mt-1 border rounded-md px-4 py-2 outline-none" 
               readOnly
             />

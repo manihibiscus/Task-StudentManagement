@@ -7,7 +7,7 @@ export const StudentHome = () => {
     const dispatch = useDispatch();
     const loggedUserString = sessionStorage.getItem('loggedUser');
     const loggedUser = JSON.parse(loggedUserString);
-    const dateOfBir=loggedUser.dateOfBirth;
+    const dateOfBir=loggedUser.dob;
     const [age, setAge] = useState();
     // const lastObj = leaveStatus.length
 
@@ -46,7 +46,7 @@ export const StudentHome = () => {
                     </div>
                     <div className="text-center text-lg font-bold">
                         <p className="text-md text-gray-500">{loggedUser.studentName}</p>
-                        <p className="text-pink-500 text-sm md:text-md">STUDENT ID: <span className="text-gray-400">{loggedUser._id}</span></p>
+                        <p className="text-pink-500 text-sm md:text-md">Ref ID: <span className="text-gray-400">{loggedUser._id}</span></p>
                     </div>
                 </div>
                 <div className="h-[300px] md:w-full lg:w-[67%] bg-white shadow-xl">
@@ -61,8 +61,8 @@ export const StudentHome = () => {
             <p className="text-gray-800 font-semibold">{loggedUser.fatherName}</p>
         </div>
         <div className="p-3 pl-6 border-b-4 flex justify-start">
-            <p className="font-semibold w-32 md:w-[200px] text-pink-600">Email</p>
-            <p className="text-gray-800 font-semibold">{loggedUser.userId}</p>
+            <p className="font-semibold w-32 md:w-[200px] text-pink-600">Register Number</p>
+            <p className="text-gray-800 font-semibold">{loggedUser.registerNumber}</p>
         </div>
         <div className="p-3 pl-6 border-b-4 flex justify-start">
             <p className="font-semibold w-32 md:w-[200px] text-pink-600">Age</p>
@@ -70,7 +70,7 @@ export const StudentHome = () => {
         </div>
         <div className="p-3 pl-6 flex justify-start">
             <p className="font-semibold w-32 md:w-[200px] text-pink-600">Date of Birth</p>
-            <p className="text-gray-800 font-semibold">{loggedUser.dateOfBirth}</p>
+            <p className="text-gray-800 font-semibold">{loggedUser.dob}</p>
         </div>
     </div>
 </div>

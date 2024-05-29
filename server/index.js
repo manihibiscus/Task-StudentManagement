@@ -74,7 +74,20 @@ app.get('/getleaveform', async (req, res) => {
   }
 });
 
-// Post
+//Get Student Registration
+
+app.get('/getstudentregistration', async (req, res) => {
+  try {
+    const database = client.db('PracticeReact');
+    const collection = database.collection('StudentRegistration');
+    const items = await collection.find({}).toArray();
+    res.json(items);
+  } catch (error) {
+    res.status(500).send('Error fetching data from the database');
+  }
+});
+
+// Post----------------
 
 app.post('/postItems', async (req, res) => {
   try {
@@ -84,12 +97,26 @@ app.post('/postItems', async (req, res) => {
     const collection = database.collection('LoginUsers');
     const result = await collection.insertOne(newItem);
     // console.log(res.status(201).json(result));
-    res.send("Registered Successfully!")
+    res.send("Login Added Successfully!")
   } catch (error) {
     res.status(500).send('Error inserting data into the database');
   }
 });
 
+// Post Student Registration
+app.post('/poststudentregistration', async (req, res) => {
+  try {
+    const studenRegDet = req.body;
+    console.log(studenRegDet);
+    const database = client.db('PracticeReact');
+    const collection = database.collection('StudentRegistration');
+    const result = await collection.insertOne(studenRegDet);
+    // console.log(res.status(201).json(result));
+    res.send("Student Registered Successfully!")
+  } catch (error) {
+    res.status(500).send('Error inserting data into the database');
+  }
+});
 
 // Post Attendence
 app.post('/postattendence', async (req, res) => {
@@ -127,7 +154,7 @@ app.patch('/updateData/:id', async (req, res) => {
     const updateData = req.body;
 
     const db = client.db('PracticeReact');
-    const result = await db.collection('LoginUsers').updateOne(
+    const result = await db.collection('StudentRegistration').updateOne(
       { _id: new ObjectId(id) },
       { $set: updateData }
     );
@@ -177,7 +204,7 @@ app.delete('/deleteData/:id', async (req, res) => {
     const { id } = req.params;
     // console.log(req.params);
     const db = client.db('PracticeReact');
-    const result = await db.collection('LoginUsers').deleteOne({ _id: new ObjectId(id) });
+    const result = await db.collection('StudentRegistration').deleteOne({ _id: new ObjectId(id) });
     if (result.deletedCount === 0) {
       return res.status(404).send('Data not found');
     }

@@ -11,7 +11,7 @@ export const LeaveStatus = () => {
   useEffect(()=>{
     dispatch(fetchData());
     const usdata = getLevDet.filter((d) => {
-      return d.reqStuEmail === loggedUser.userId;
+      return d.reqStuReg === loggedUser.registerNumber;
     });
     if(usdata){
       setFilterLevData(usdata);
@@ -47,7 +47,7 @@ export const LeaveStatus = () => {
                 <td className="py-2 px-4 border-b text-gray-900 border-r">
                   <input 
                     type="text" 
-                    value={filterData.reqStuEmail} 
+                    value={filterData.reqStuReg} 
                     readOnly 
                     className="w-full px-2 py-1 border rounded-md outline-none bg-gray-100 text-center"
                   />

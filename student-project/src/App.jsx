@@ -19,6 +19,7 @@ import { LeaveRequest } from './components/LeaveRequest'
 import { LeaveStatus } from './components/LeaveStatus'
 import { LeaveConfrim } from './components/LeaveConfrim'
 import { StudentHome } from './components/StudentHome'
+import { StudentRegistration } from './components/StudentRegistration'
 // import { useState } from 'react'
 // import Alert from './Alert'
   // import ProtectedRoute from '../ProtectedRouter/Protectroute'
@@ -54,7 +55,7 @@ import { StudentHome } from './components/StudentHome'
       <Route path='/leavestatus' element={<LeaveStatus />}/>
       <Route path='/leaveconfrim' element={<LeaveConfrim />} />
       <Route path='/studenthome' element={<StudentHome />} />
-
+      <Route path='/studentregistration' element={<StudentRegistration />} />
       </Route>
       </Routes>
       </Provider>

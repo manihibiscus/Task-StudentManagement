@@ -55,6 +55,7 @@ export const Header = () => {
                 <div id="nav-menu" className="hidden md:flex gap-12 text-lg">
                     {/* <a className="font-medium hover:text-blue-500"><Link to="/adminpage">Home</Link></a> */}
                     <a className="font-medium hover:text-blue-500"><Link to="/studentdetails">Student Details</Link></a>
+                    <a className="font-medium hover:text-blue-500"><Link to="/studentregistration">Student Registration</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link to="/attendence">Attendence</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link to="/leaveconfrim">Leave Confrim </Link></a>
                     <a className="font-medium hover:text-blue-500"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>

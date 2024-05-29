@@ -4,11 +4,11 @@ import { fetchData } from "../Redux/Slice/loginSlice";
 import { deleteStudentData, updateStudentData } from "../Redux/Slice/studentDetailsSlice";
 
 export const Student = () => {
-    const studentDetails = useSelector((state) => state.login.loginUser);
+    const studentDetails = useSelector((state) => state.login.studReg);
     const upData = useSelector(state => state.studentUpdateDelete);
     const dispatch = useDispatch();
     const [editId, setEditId] = useState(null);
-    const [editedData, setEditedData] = useState({ id: "", studentName: "", fatherName: "", userId: "" });
+    const [editedData, setEditedData] = useState({ id: "", studentName: "", fatherName: "", dob: "", phoneNumber:"" });
 
     useEffect(() => {
         dispatch(fetchData());
@@ -16,7 +16,7 @@ export const Student = () => {
 
     const handleEditClick = (student) => {
         setEditId(student._id);
-        setEditedData({ id: student._id, studentName: student.studentName, fatherName: student.fatherName, userId: student.userId });
+        setEditedData({ id: student._id, studentName: student.studentName, fatherName: student.fatherName, dob:student.dob, phoneNumber:student.phoneNumber});
     };
 
     const handleSaveClick = () => {
@@ -46,7 +46,8 @@ export const Student = () => {
                     <tr>
                         <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Name</th>
                         <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Father Name</th>
-                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Email</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Date of Birth</th>
+                        <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Phone Number</th>
                         <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Edit</th>
                         <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-widest">Delete</th>
                     </tr>
@@ -84,13 +85,26 @@ export const Student = () => {
                                 {editId === student._id ? (
                                     <input
                                         type="text"
-                                        name="userId"
-                                        value={editedData.userId}
+                                        name="dob"
+                                        value={editedData.dob}
                                         onChange={handleInputChange}
                                         className="border border-gray-300 p-2 rounded"
                                     />
                                 ) : (
-                                    student.userId
+                                    student.dob
+                                )}
+                            </td>
+                            <td className="px-6 py-4">
+                                {editId === student._id ? (
+                                    <input
+                                        type="text"
+                                        name="phoneNumber"
+                                        value={editedData.phoneNumber}
+                                        onChange={handleInputChange}
+                                        className="border border-gray-300 p-2 rounded"
+                                    />
+                                ) : (
+                                    student.phoneNumber
                                 )}
                             </td>
                             <td className="px-6 py-4">
@@ -104,7 +118,7 @@ export const Student = () => {
                                         </button>
                                         <button
                                             onClick={handleCancelClick}
-                                            className="bg-gray-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                            className="bg-gray-400 mt-2 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
                                         >
                                             Cancel
                                         </button>

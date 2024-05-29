@@ -5,7 +5,7 @@ import { fetchData } from "../Redux/Slice/loginSlice";
 import { submitStatus } from "../Redux/Slice/studentDetailsSlice";
 
 export const Attendence = () => {
-  const data = useSelector((state) => state.login.loginUser);
+  const data = useSelector((state) => state.login.studReg);
   const stu = useSelector(state=> state.studentUpdateDelete);
   const dispatch = useDispatch();
   const date = new Date();
