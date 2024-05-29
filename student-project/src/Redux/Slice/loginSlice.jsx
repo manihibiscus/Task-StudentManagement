@@ -13,6 +13,8 @@ export const fetchData = () => {
             dispatch(fetchAdminData(data2));
         } catch (error) {
             console.error('Error fetching data:', error);
+
+
         }
     };
 };
@@ -26,7 +28,8 @@ const loginSlice = createSlice({
         adminNavigation:false,
         studentNavigation:false,
         loginUser:[],
-        adminUser:[]
+        adminUser:[],
+        alertVisible:false
     },
     reducers:{
         setEmail:(state,action)=>{
@@ -88,6 +91,7 @@ const loginSlice = createSlice({
                 
                 if(user){
                 alert("Login Successfully!!!");
+                state.alertVisible=true;
                 const user = state.loginUser.find((a)=>{
                     return a.userId===state.email
                 });

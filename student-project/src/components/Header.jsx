@@ -83,6 +83,13 @@ export const Header = () => {
         <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/attendance" >Attendence</Link></a>
         <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
     </div>)}
+    {userValue && !value && (
+    <div className={`absolute right-1 bg-white w-[200px] text-lg rounded-md ${data.menuToggle ? 'visible' : 'invisible'} `}>
+        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" ><Link to="/studenthome">Home</Link></a>
+        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/leaverequest">Leave Request</Link></a>
+        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/leavestatus">Leave Status</Link></a>
+        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
+    </div>)}
     {/* {value && (
         <div className={`fixed w-[300px] h-full bg-white shadow-lg transition-transform duration-300 ease-in-out ${data.adminToggle ? "translate-x-0" : "-translate-x-full"}`}>
         <ul className="flex flex-col space-y-2 p-4">

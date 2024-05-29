@@ -2,10 +2,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData,setEmail,setPassword,submitData } from "../Redux/Slice/loginSlice";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import Alert from "../Alert";
 export const Login = () => {
     const loginData = useSelector((state)=>state.login);
+    // const alert = useSelector((state)=>state.login.alertVisible);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    // const showAlert = () => {
+    //   setAlertVisible(true);
+    // };
+  
+    // const closeAlert = () => {
+    //   setAlertVisible(false);
+    // };
+
     useEffect(()=>{
         dispatch(fetchData());
         if(loginData.studentNavigation){
@@ -14,7 +25,9 @@ export const Login = () => {
         else if(loginData.adminNavigation){
           navigate('/studentDetails');
         }
-        
+        else if(alert){
+      // {alert && <Alert message="This is an alert message." onClose={closeAlert} />} 
+        }
       // eslint-disable-next-line react-hooks/exhaustive-deps
       },[loginData.navigation, loginData.adminNavigation]);
   return (

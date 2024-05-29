@@ -19,12 +19,25 @@ import { LeaveRequest } from './components/LeaveRequest'
 import { LeaveStatus } from './components/LeaveStatus'
 import { LeaveConfrim } from './components/LeaveConfrim'
 import { StudentHome } from './components/StudentHome'
+// import { useState } from 'react'
+// import Alert from './Alert'
   // import ProtectedRoute from '../ProtectedRouter/Protectroute'
   function App() {
+    // const [alertVisible, setAlertVisible] = useState(true);
 
+    // const showAlert = () => {
+    //   setAlertVisible(true);
+    // };
+  
+    // const closeAlert = () => {
+    //   setAlertVisible(false);
+    // };
+    
     return (
+
       <BrowserRouter>
       <Provider store={store}>
+      {/* {alertVisible && <Alert message="This is an alert message." onClose={closeAlert} />} */}
       <Header />
       <Routes>
       <Route path="/" element={<Home />}/>

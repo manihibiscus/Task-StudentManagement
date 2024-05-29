@@ -34,7 +34,7 @@ export const LeaveStatus = () => {
             </tr>
           </thead>
           <tbody>
-          {filterLevData.map(filterData=>(
+          {filterLevData && filterLevData.map(filterData=>(
                 <tr key={filterData._id}>
                 <td className="py-2 px-4 border-b text-gray-900 border-r">
                   <input 
@@ -83,7 +83,7 @@ export const LeaveStatus = () => {
                   />
                 </td>
               </tr>
-              ))}
+            ))}
           </tbody>
         </table>
       </div>
