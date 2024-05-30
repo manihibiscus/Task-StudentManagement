@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil,faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { fetchData } from "../Redux/Slice/loginSlice";
-import { submitStatus } from "../Redux/Slice/studentDetailsSlice";
+import { attendenceUpdate, submitStatus } from "../Redux/Slice/studentDetailsSlice";
 
 export const Attendence = () => {
   const data = useSelector((state) => state.login.studReg);
-  const stu = useSelector(state=> state.studentUpdateDelete);
+  const stu = useSelector((state) => state.studentUpdateDelete);
   const dispatch = useDispatch();
   const date = new Date();
   const [value, setValue] = useState([]);
   const [attendenceData, setAttendanceData] = useState([]);
   const [status, setStatus] = useState(true);
-//   const [submit, setSubmit] = useState(false);
+  //   const [submit, setSubmit] = useState(false);
   const [choosed, setChoose] = useState(false);
   const [dateWise, setDateWise] = useState([]);
-
+  const [editOption, setEditOPtion] = useState(null);
+  const [editedData, setEditedData] = useState({attendendStatus:"" });
+  // const [updateVal, setUpdateVal] = useState("")
+  // const attenDetails = useSelector((state)=>state.login.attendenceDetails);
   useEffect(() => {
     dispatch(fetchData());
     const attendenceData = async () => {
@@ -25,12 +30,13 @@ export const Attendence = () => {
       } catch (error) {
         console.error("Error fetching attendance data:", error);
       }
+        // setAttendanceData(attenDetails);
     };
     attendenceData();
     checking();
-  }, [stu.submit, attendenceData]);
+  }, [stu.submit, attendenceData, setEditOPtion, dispatch ]);
 
-  const checking = ()=>{
+  const checking = () => {
     const today = date.toISOString().split("T")[0];
     if (attendenceData.length > 0) {
       const daily = attendenceData.find((c) => {
@@ -40,7 +46,7 @@ export const Attendence = () => {
         setStatus(false);
       }
     }
-  }
+  };
 
   const handleRadioChange = (id, name, attendData) => {
     const index = value.findIndex((item) => item.studentId === id);
@@ -73,9 +79,8 @@ export const Attendence = () => {
         alert("Error occured");
       });
 
-      dispatch(submitStatus());
+    dispatch(submitStatus());
   };
-
 
   const choose = (value) => {
     if (value === "Entry") {
@@ -90,6 +95,35 @@ export const Attendence = () => {
     });
     setDateWise(dateWissAtt);
   };
+
+  const update = (val)=>{
+    // const getVal=val
+    // setUpdateVal(getVal);
+    setEditedData({attendendStatus:val});
+    // setTimeout(()=>{
+    //   alert(updateVal);
+    // },2000);
+  }
+
+  const updateAttencence = (e, attendenceDet) => {
+    e.preventDefault();
+    setEditOPtion(attendenceDet._id);
+    setEditedData({attendendStatus:attendenceDet.attendendStatus});
+    // alert(attendenceDet._id);
+  };
+  const sendAttendence = (e, id)=>{
+    e.preventDefault(); 
+    var ref=[{id:id._id},{editedData}];
+    dispatch(attendenceUpdate(ref));
+    // axios.patch(`http://localhost:3000/updateattendence/${id}`,editedData)
+    // .then(response=>{
+    //     alert(response.data);
+    // })
+    // .catch(error => {
+    //     console.error('Error:', error);
+    // }); 
+    setEditOPtion(null);    
+  }
   return (
     <>
       <div className="flex flex-row items-strat justify-center gap-4 p-4">
@@ -131,6 +165,7 @@ export const Attendence = () => {
           </p>
           {status ? (
             <div>
+              <form action="">
               <table className="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
                 <thead className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
                   <tr>
@@ -168,6 +203,7 @@ export const Attendence = () => {
                             name={`attendance-${detail._id}`}
                             value="leave"
                             className="form-radio h-5 w-5 text-blue-600"
+                            required
                             onChange={() =>
                               handleRadioChange(
                                 detail._id,
@@ -183,6 +219,7 @@ export const Attendence = () => {
                             name={`attendance-${detail._id}`}
                             value="present"
                             className="form-radio h-5 w-5 text-blue-600"
+                            required
                             onChange={() =>
                               handleRadioChange(
                                 detail._id,
@@ -198,6 +235,7 @@ export const Attendence = () => {
                             name={`attendance-${detail._id}`}
                             value="absent"
                             className="form-radio h-5 w-5 text-blue-600"
+                            required
                             onChange={() =>
                               handleRadioChange(
                                 detail._id,
@@ -211,6 +249,7 @@ export const Attendence = () => {
                     ))}
                 </tbody>
               </table>
+              </form>
               <div className="container mx-auto mt-2 flex items-center justify-center">
                 <button
                   className="bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-300"
@@ -269,10 +308,42 @@ export const Attendence = () => {
                         {attendenceDetail.studentName}
                       </td>
                       <td className="py-3 px-4 text-sm">10A</td>
-                      <td className={`py-3 px-4 uppercase ${
-                        attendenceDetail.attendendStatus == "present" ? 'text-green-500 font-bold' : attendenceDetail.attendendStatus == "absent" ? 'text-red-600 font-bold' : 'text-yellow-600 font-bold'}`}>
-
-                        {attendenceDetail.attendendStatus}
+                      <td
+                        className={`py-3 px-4 uppercase ${
+                          attendenceDetail.attendendStatus == "present"
+                            ? "text-green-500 font-bold"
+                            : attendenceDetail.attendendStatus == "absent"
+                            ? "text-red-600 font-bold"
+                            : "text-yellow-600 font-bold"
+                        }`}
+                      >
+                        <div
+                          className="absolute w-[10px] h-[10px] pl-20 cursor-pointer"
+                        >
+                          {editOption === attendenceDetail._id ? (
+                          <p className="absolute pt-2 pl-3"><FontAwesomeIcon onClick={(e)=>sendAttendence(e, attendenceDetail)} className="w-[22px] h-[20px] text-green-800" icon={faCheck} /></p>
+                          )
+                          :(
+                              <p onClick={(e) => updateAttencence(e, attendenceDetail)}><FontAwesomeIcon className="text-pink-800" icon={faPencil} /></p> 
+                            )}
+                        </div>
+                        {editOption === attendenceDetail._id ? (
+                          // <input
+                          //   type="text"
+                          //   name="studentName"
+                          //   value={editedData.attendendStatus}
+                          //   className="border border-gray-300 p-2 w-[80px] rounded"
+                          // />
+                       
+                          <select name="attendendStatus" value={editedData.attendendStatus} id="" onChange={(e)=>update(e.target.value)}>
+                          <option value="present">PRESENT</option>
+                          <option value="absent">ABSENT</option>
+                          <option value="leave">LEAVE</option>
+                          </select>
+                      
+                        ) : (
+                          attendenceDetail.attendendStatus
+                        )}
                       </td>
                     </tr>
                   ))}

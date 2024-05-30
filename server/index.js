@@ -190,6 +190,28 @@ app.patch('/updateleavedetails/:id', async (req, res) => {
   }
 });
 
+// Update Attendence
+app.patch('/updateattendence/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateAttendence = req.body;
+
+    const db = client.db('PracticeReact');
+    const result = await db.collection('StudentAttendence').updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updateAttendence }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send('Data not found');
+    }
+
+    res.status(200).send('Attendence Updated successfully');
+  } catch (error) {
+    res.status(500).send('Error updating data in the database');
+  }
+});
+
 // app.delete('/deleteData',(request,response)=>{
 //   const database = client.db('PracticeReact');
 //   database.collection("LoginUsers").deleteOne({

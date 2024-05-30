@@ -34,9 +34,19 @@ const studentDetailsSlice = createSlice({
         },
         submitStatus:(state)=>{
             state.submit="Submitted";
+        },
+        attendenceUpdate:(state,action)=>{
+            console.log(action.payload[1].editedData);
+            axios.patch(`http://localhost:3000/updateattendence/${action.payload[0].id}`,action.payload[1].editedData)
+            .then(response=>{
+                alert(response.data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            }); 
         }
     }
 });
 
-export const {updateStudentData, deleteStudentData, attendence, submitStatus} = studentDetailsSlice.actions;
+export const {updateStudentData, deleteStudentData, attendence, submitStatus, attendenceUpdate} = studentDetailsSlice.actions;
 export default studentDetailsSlice.reducer;

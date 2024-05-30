@@ -6,14 +6,17 @@ export const fetchData = () => {
         try {
             const response = await axios.get("http://localhost:3000/items");
             const response2 = await axios.get("http://localhost:3000/adminItem");
-            const response3 = await axios.get("http://localhost:3000/getstudentregistration")
+            const response3 = await axios.get("http://localhost:3000/getstudentregistration");
+            const response4 = await axios.get("http://localhost:3000/getattendence");
             const data = response.data;
             const data2 = response2.data;
             const data3 = response3.data;
+            const data4 = response4.data;
             // console.log(data[0].userId);
             dispatch(fetchLoginData(data));
             dispatch(fetchAdminData(data2));
             dispatch(fetchStudRegData(data3))
+            dispatch(fetchAttendenceData(data4))
         } catch (error) {
             console.error('Error fetching data:', error);
 
@@ -33,6 +36,7 @@ const loginSlice = createSlice({
         loginUser:[],
         adminUser:[],
         studReg:[],
+        attendenceDetails:[],
         alertVisible:false
     },
     reducers:{
@@ -148,6 +152,9 @@ const loginSlice = createSlice({
             state.studReg=action.payload;
             // console.log(state.adminUser[0].adminUSerId)
         },
+        fetchAttendenceData:(state,action)=>{
+            state.attendenceDetails=action.payload;
+        },
         logout:(state)=>{
             state.adminNavigation=false;
             state.studentNavigation=false;
@@ -160,5 +167,5 @@ const loginSlice = createSlice({
     }
 });
 
-export const {submitData, setPassword, setEmail, fetchStudRegData, fetchLoginData,fetchAdminData, logout} = loginSlice.actions
+export const {submitData, setPassword, setEmail, fetchStudRegData, fetchAttendenceData, fetchLoginData,fetchAdminData, logout} = loginSlice.actions
 export default loginSlice.reducer;

@@ -46,9 +46,9 @@ export const StudentRegistration = () => {
 
   const validate = () => {
     let formErrors = {};
-    if (!formData.studentName) formErrors.studentName = 'Student Name is required';
-    if (!formData.fatherName) formErrors.fatherName = 'Father Name is required';
-    if (!formData.motherName) formErrors.motherName = 'Mother Name is required';
+    if (!/^[A-Za-z\s]+$/.test(formData.studentName)) formErrors.studentName = 'Please Enter Name';
+    if (!/^[A-Za-z\s]+$/.test(formData.fatherName))formErrors.fatherName = 'Please Enter Name';
+    if (!/^[A-Za-z\s]+$/.test(formData.motherName)) formErrors.motherName = 'Please Enter Name';
     if (!formData.dob) formErrors.dob = 'Date of Birth is required';
     if (!formData.gender) formErrors.gender = 'Gender is required';
     if (!formData.phoneNumber) {
@@ -113,7 +113,7 @@ export const StudentRegistration = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form className="bg-white p-8 rounded shadow-md w-full max-w-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl mb-6 text-center">Student Information</h2>
+        <h2 className="text-2xl mb-6 text-center">Student Registration</h2>
         <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="studentName">Student Name</label>
           <input
@@ -258,7 +258,7 @@ export const StudentRegistration = () => {
           />
           {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Register</button>
       </form>
     </div>
   );
