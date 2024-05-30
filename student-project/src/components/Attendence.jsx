@@ -6,6 +6,7 @@ import axios from "axios";
 import { fetchData } from "../Redux/Slice/loginSlice";
 import { attendenceUpdate, submitStatus } from "../Redux/Slice/studentDetailsSlice";
 
+
 export const Attendence = () => {
   const data = useSelector((state) => state.login.studReg);
   const stu = useSelector((state) => state.studentUpdateDelete);
@@ -20,34 +21,37 @@ export const Attendence = () => {
   const [editOption, setEditOPtion] = useState(null);
   const [editedData, setEditedData] = useState({attendendStatus:"" });
   // const [updateVal, setUpdateVal] = useState("")
-  // const attenDetails = useSelector((state)=>state.login.attendenceDetails);
+  const attenDetails = useSelector((state)=>state.login.attendenceDetails);
   useEffect(() => {
     dispatch(fetchData());
-    const attendenceData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/getattendence");
-        setAttendanceData(response.data);
-      } catch (error) {
-        console.error("Error fetching attendance data:", error);
-      }
-        // setAttendanceData(attenDetails);
-    };
-    attendenceData();
+    // const attendenceData = async () => {
+    //   try {
+    //     const response = await axios.get("http://localhost:3000/getattendence");
+    //     setAttendanceData(response.data);
+    //   } catch (error) {
+    //     console.error("Error fetching attendance data:", error);
+    //   }
+    // };
+    // attendenceData();
+    setAttendanceData(attenDetails);
     checking();
-  }, [stu.submit, attendenceData, setEditOPtion, dispatch ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    stu.submit, attendenceData, attenDetails, stu.update
+  ]);
 
   const checking = () => {
     const today = date.toISOString().split("T")[0];
     if (attendenceData.length > 0) {
-      const daily = attendenceData.find((c) => {
+      const daily = attendenceData.filter((c) => {
         return c.date === today;
       });
-      if (daily) {
+      if (daily.length == data.length) {
         setStatus(false);
       }
     }
   };
-
+  console.log(attendenceData);
   const handleRadioChange = (id, name, attendData) => {
     const index = value.findIndex((item) => item.studentId === id);
     console.log(index);
@@ -69,8 +73,8 @@ export const Attendence = () => {
   };
 
   const handleSubmit = () => {
-    axios
-      .post("http://localhost:3000/postattendence", value)
+    if(value.length == data.length){
+    axios.post("http://localhost:3000/postattendence", value)
       .then((response) => {
         alert(response.data);
       })
@@ -78,7 +82,10 @@ export const Attendence = () => {
         console.error("Error:", error);
         alert("Error occured");
       });
-
+    }
+    else{
+      alert("Enter All Fields")
+    }
     dispatch(submitStatus());
   };
 
@@ -122,7 +129,7 @@ export const Attendence = () => {
     // .catch(error => {
     //     console.error('Error:', error);
     // }); 
-    setEditOPtion(null);    
+    setEditOPtion(null);
   }
   return (
     <>
@@ -157,7 +164,7 @@ export const Attendence = () => {
           </label>
         </div>
       </div>
-
+      <ToastContainer />
       {!choosed ? (
         <div className="container mx-auto p-4">
           <p className="text-lg font-bold text-blue-800 text-center">
@@ -307,7 +314,7 @@ export const Attendence = () => {
                       <td className="py-3 px-4 text-sm">
                         {attendenceDetail.studentName}
                       </td>
-                      <td className="py-3 px-4 text-sm">10A</td>
+                      <td className="py-3 px-4 text-sm">{attendenceDetail.className}</td>
                       <td
                         className={`py-3 px-4 uppercase ${
                           attendenceDetail.attendendStatus == "present"

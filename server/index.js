@@ -3,6 +3,10 @@ import cors from 'cors';
 import { MongoClient } from 'mongodb';
 import 'dotenv/config';
 import { ObjectId } from 'mongodb';
+import twilio from 'twilio';
+import bodyParser from 'body-parser';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const app = express();
 const port = 3000;
 
@@ -29,6 +33,31 @@ connectToDatabase();
 app.get('/', (req, res) => {
   res.send('Welcome to my Express server with MongoDB Atlas using MongoClient!');
 });
+
+//SMS - Send
+
+app.use(bodyParser.json());
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const fromNumber = process.env.TWILIO_PHONE_NUMBER;
+const cli = twilio(accountSid, authToken);
+
+app.post('/send-sms', (req, res) => {
+    const { to, message } = req.body;
+    cli.messages.create({
+        body: message,
+        from: fromNumber,
+        to: to
+    })
+    .then(message => res.status(200).send({ success: true, messageSid: message.sid }))
+    .catch(err => {
+        console.error('Error sending SMS:', err); // Log the error details
+        res.status(500).send({ success: false, error: err.message });
+    });
+});
+
+
 
 app.get('/items', async (req, res) => {
   try {

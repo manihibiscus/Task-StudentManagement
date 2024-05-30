@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData,setEmail,setPassword,submitData } from "../Redux/Slice/loginSlice";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 // import Alert from "../Alert";
 export const Login = () => {
     const loginData = useSelector((state)=>state.login);
@@ -37,7 +38,7 @@ export const Login = () => {
           <h1 className="text-center font-semibold text-4xl text-gray-800">Login</h1>
           <form onSubmit={(e)=>dispatch(submitData(e))} className="space-y-">
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-medium text-gray-700">Email:</label>
+              <label htmlFor="email" className="text-lg font-medium text-gray-700">Register Number:</label>
               <input 
                 type="text" 
                 id="email" 

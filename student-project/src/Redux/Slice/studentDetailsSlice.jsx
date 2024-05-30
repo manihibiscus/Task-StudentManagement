@@ -3,7 +3,7 @@ import axios from "axios";
 
 const studentDetailsSlice = createSlice({
     name:"studentDetailsSlice",
-    initialState:{updateData:[], deleteId:"", studentAttendence:false, attendData:[], submit:[]},
+    initialState:{updateData:[], deleteId:"", studentAttendence:false, attendData:[], submit:[], updated:""},
     reducers:{
         updateStudentData:(state, action)=>{
             state.updateData=action.payload
@@ -44,6 +44,7 @@ const studentDetailsSlice = createSlice({
             .catch(error => {
                 console.error('Error:', error);
             }); 
+            state.updated="Updated";
         }
     }
 });

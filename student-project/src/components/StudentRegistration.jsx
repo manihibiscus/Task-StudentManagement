@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const generateRegisterNumber = () => {
     return 'REG' + Math.floor(1000 + Math.random() * 9000);
   };
@@ -82,7 +83,8 @@ export const StudentRegistration = () => {
   const postData = () =>{
     axios.post('http://localhost:3000/poststudentregistration', formData)
         .then(response => {
-            alert(response.data);
+            // alert(response.data);
+            toast.success("Register Successfully!");
         })
         .catch(error => {
             console.error('Error:', error);
@@ -102,16 +104,19 @@ export const StudentRegistration = () => {
     }
     axios.post('http://localhost:3000/postItems', detail)
         .then(response => {
-            alert(response.data);
+            // alert(response.data);
+            toast.success("Login Added!");
         })
         .catch(error => {
             console.error('Error:', error);
             alert("Error occured");
+            toast.error("Failed to Register!")
         });
   }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <ToastContainer />
       <form className="bg-white p-8 rounded shadow-md w-full max-w-md" onSubmit={handleSubmit}>
         <h2 className="text-2xl mb-6 text-center">Student Registration</h2>
         <div className="mb-4">

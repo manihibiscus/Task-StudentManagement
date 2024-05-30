@@ -35,7 +35,6 @@ import { StudentRegistration } from './components/StudentRegistration'
     // };
     
     return (
-
       <BrowserRouter>
       <Provider store={store}>
       {/* {alertVisible && <Alert message="This is an alert message." onClose={closeAlert} />} */}
