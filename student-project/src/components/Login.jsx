@@ -34,28 +34,34 @@ export const Login = () => {
   return (
     <div>
     <div className="flex items-center justify-center mt-20 bg-white">
-        <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg border-2 border-gray-400">
-          <h1 className="text-center font-semibold text-4xl text-gray-800">Login</h1>
+        <div className="w-full max-w-md p-8 space-y-6 rounded-xl border-2 shadow-lg md:border-2 md:border-gray-400">
+          <h1 className="text-center font-semibold text-xl md:text-4xl text-gray-800">Login</h1>
           <form onSubmit={(e)=>dispatch(submitData(e))} className="space-y-">
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-medium text-gray-700">Register Number:</label>
+              <label htmlFor="email" className="md:text-lg font-medium text-gray-700">Register Number:</label>
               <input 
                 type="text" 
                 id="email" 
                 value={loginData.email}
                 onChange={(e) => dispatch(setEmail(e.target.value))}
-                className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${loginData.errors.email ? 'border-red-500' : 'border-gray-300'}`} 
+                className={`mt-1 border-l-0 border-r-0 border-t-0 border-b-2 px-4 py-2 focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500 outline-none
+                 placeholder-gray-500 placeholder:text-sm placeholder-opacity-75 border-2 border-gray-300 p-2 rounded-md focus:outline-none
+                 ${loginData.errors.email ? 'border-red-500' : 'border-gray-300'}`} 
                 placeholder="Eg: REG****" />
               {loginData.errors.email && <span className="text-red-500 text-sm mt-1">{loginData.errors.email}</span>}
-            </div>
+            </div><br />
             <div className="flex flex-col">
-              <label htmlFor="password" className="text-lg font-medium text-gray-700">Password:</label>
+              <label htmlFor="password" className="md:text-lg font-medium text-gray-700">Password:</label>
               <input 
                 type="text" 
                 id="password" 
                 value={loginData.password}
                 onChange={(e) => dispatch(setPassword(e.target.value))}
-                className={`mt-1 border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none ${loginData.errors.password ? 'border-red-500' : 'border-gray-300'}`} 
+                className={`mt-1 border-l-0 border-r-0 border-t-0 border-b-2 px-4 py-2 focus:ring-2
+                 focus:ring-blue-500 focus:border-blue-500 outline-none 
+                 placeholder-gray-500 placeholder:text-sm placeholder-opacity-75 border-2 border-gray-300 p-2 rounded-md focus:outline-none
+                 ${loginData.errors.password ? 'border-red-500' : 'border-gray-300'}`} 
                 placeholder="Eg: YYYY-MM-DD"
               />
               {loginData.errors.password && <span className="text-red-500 text-sm mt-1">{loginData.errors.password}</span>}
