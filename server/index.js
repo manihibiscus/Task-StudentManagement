@@ -5,8 +5,6 @@ import 'dotenv/config';
 import { ObjectId } from 'mongodb';
 import twilio from 'twilio';
 import bodyParser from 'body-parser';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 const app = express();
 const port = 3000;
 

@@ -84,7 +84,7 @@ export const StudentRegistration = () => {
     axios.post('http://localhost:3000/poststudentregistration', formData)
         .then(response => {
             // alert(response.data);
-            toast.success("Register Successfully!");
+            toast.success(response.data);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -105,7 +105,7 @@ export const StudentRegistration = () => {
     axios.post('http://localhost:3000/postItems', detail)
         .then(response => {
             // alert(response.data);
-            toast.success("Login Added!");
+            toast.success(response.data);
         })
         .catch(error => {
             console.error('Error:', error);

@@ -6,7 +6,6 @@ import axios from "axios";
 import { fetchData } from "../Redux/Slice/loginSlice";
 import { attendenceUpdate, submitStatus } from "../Redux/Slice/studentDetailsSlice";
 
-
 export const Attendence = () => {
   const data = useSelector((state) => state.login.studReg);
   const stu = useSelector((state) => state.studentUpdateDelete);
@@ -164,7 +163,7 @@ export const Attendence = () => {
           </label>
         </div>
       </div>
-      <ToastContainer />
+
       {!choosed ? (
         <div className="container mx-auto p-4">
           <p className="text-lg font-bold text-blue-800 text-center">
