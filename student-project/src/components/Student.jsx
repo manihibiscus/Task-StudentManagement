@@ -40,11 +40,12 @@ export const Student = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="p-4">
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                     <thead className="bg-blue-600 text-white">
                         <tr>
+                            <th className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs sm:text-sm font-medium uppercase tracking-widest">Name</th>
                             <th className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs sm:text-sm font-medium uppercase tracking-widest">Name</th>
                             <th className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs sm:text-sm font-medium uppercase tracking-widest">Father Name</th>
                             <th className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs sm:text-sm font-medium uppercase tracking-widest">Date of Birth</th>
@@ -56,6 +57,9 @@ export const Student = () => {
                     <tbody className="divide-y divide-gray-200">
                         {studentDetails && studentDetails.map((student) => (
                             <tr key={student._id} className="hover:bg-gray-100">
+                                <td>
+                                   <p className="pl-2 text-green-600 font-semibold">{student.registerNumber}</p> 
+                                </td>
                                 <td className="px-4 py-2 sm:px-6 sm:py-4">
                                     {editId === student._id ? (
                                         <input

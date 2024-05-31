@@ -44,7 +44,7 @@ const loginSlice = createSlice({
             state.email=action.payload
             let emailValidate =/^REG\d{4}$/.test(state.email);
             if(!state.email){
-                state.errors.email="Email is required.";
+                state.errors.email="Reg Number is Required.";
                 state.errors.emailStatus=false;
             }
             else{
@@ -52,7 +52,7 @@ const loginSlice = createSlice({
             }
             if(state.email){
                 if(!emailValidate){
-                state.errors.email="Email Invalid";
+                state.errors.email="Reg Number Invalid";
                 state.errors.emailStatus=false;
                 }
                 else{
@@ -65,7 +65,7 @@ const loginSlice = createSlice({
             state.password=action.payload
             let passwordRegex = /^\d{4}-\d{2}-\d{2}$/.test(state.password);
             if(!state.password){
-                state.errors.password="Password is required.";
+                state.errors.password="Date of Birth is required.";
                 state.errors.passStatus=false;
             }
             else{
@@ -73,7 +73,7 @@ const loginSlice = createSlice({
             }
             if(state.password){
                 if(!passwordRegex){
-                state.errors.password="Password Invalid";
+                state.errors.password="Date of Birth Invalid";
                 state.errors.passStatus=false;
     
                 }

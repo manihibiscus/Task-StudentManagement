@@ -46,8 +46,17 @@ export const Header = () => {
         </a>
             {!value && !userValue &&(
                 <div id="nav-menu" className="hidden md:flex gap-12 text-lg">
-                    <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link to="/home">Home</Link></a>
-                    <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link to="/about">About Us</Link></a>
+                    <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link 
+                    // className={`${
+                    //   location.pathname === '/home' ? 'text-white bg-gray-900' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    // } px-3 py-2 rounded-md text-sm font-medium`} 
+                    
+                    to="/home">Home</Link></a>
+                    <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link 
+                    // className={`${
+                    //   location.pathname === '/home' ? 'text-white bg-gray-900' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    // } px-3 py-2 rounded-md text-sm font-medium`}
+                    to="/about">About Us</Link></a>
                     <a className="font-medium hover:bg-pink-200 px-2 py-1 hover:text-pink-700 rounded-md"><Link to="/login">Login</Link></a>
                 </div>
             )}
