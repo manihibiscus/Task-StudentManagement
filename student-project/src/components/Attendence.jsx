@@ -72,6 +72,7 @@ export const Attendence = () => {
   };
 
   const handleSubmit = () => {
+    alert(`${value.length} - ${data.length}`);
     if(value.length == data.length){
     axios.post("https://task-student-management-sxna.vercel.app/postattendence", value)
       .then((response) => {

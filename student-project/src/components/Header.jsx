@@ -74,22 +74,24 @@ export const Header = () => {
     </nav>
     {!value && (
     <div className={`absolute right-1 bg-white w-[200px] h-[200px] text-lg rounded-md ${data.menuToggle ? 'visible' : 'invisible'} `}>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" ><Link to="/home" >Home</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/about" >About Us</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" ><Link to="/login" >Login</Link></a>
+        <Link to="/home" onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" >Home</a></Link>
+        <Link to="/about" onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >About Us</a></Link>
+        <Link to="/login" onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" >Login</a></Link>
     </div>)}
     {value && (
     <div className={`absolute right-1 bg-white w-[200px] text-lg rounded-md ${data.menuToggle ? 'visible' : 'invisible'} `}>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" ><Link to="/studentdetails" >Student Details</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/attendance" >Attendence</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
+        <Link to="/studentdetails"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" >Student Details</a></Link>
+        <Link to="/studentregistration"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Student Registration</a></Link>
+        <Link to="/attendence"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Attendence</a></Link>
+        <Link to="/leaveconfrim"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Leave Confrim</a></Link>
+        <Link onClick={()=>dispatch(logout())} to="/home"><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2">Logout</a></Link>
     </div>)}
     {userValue && !value && (
     <div className={`absolute right-1 bg-white w-[200px] text-lg rounded-md ${data.menuToggle ? 'visible' : 'invisible'} `}>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" ><Link to="/studenthome">Home</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/leaverequest">Leave Request</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  ><Link to="/leavestatus">Leave Status</Link></a>
-        <a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
+        <Link to="/studenthome" onClick={()=>dispatch(clickMenu())}><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2" >Home</a></Link>
+        <Link to="/leaverequest" onClick={()=>dispatch(clickMenu())}><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Leave Request</a> </Link>
+        <Link to="/leavestatus" onClick={()=>dispatch(clickMenu())}><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Leave Status</a></Link>
+        <Link onClick={()=>dispatch(logout())} to="/home"><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2">Logout</a></Link>
     </div>)}
     {/* {value && (
         <div className={`fixed w-[300px] h-full bg-white shadow-lg transition-transform duration-300 ease-in-out ${data.adminToggle ? "translate-x-0" : "-translate-x-full"}`}>
