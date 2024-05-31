@@ -18,7 +18,7 @@ export const LeaveConfrim = () => {
         status:"Accepted"
     };
 
-    axios.patch(`http://localhost:3000/updateleavedetails/${detail._id}`,body)
+    axios.patch(`https://task-student-management-sxna.vercel.app/updateleavedetails/${detail._id}`,body)
     .then(response=>{
         alert(response.data);
     })
@@ -32,7 +32,7 @@ export const LeaveConfrim = () => {
         status:"Rejected"
     };
 
-    axios.patch(`http://localhost:3000/updateleavedetails/${detail._id}`,body)
+    axios.patch(`https://task-student-management-sxna.vercel.app/updateleavedetails/${detail._id}`,body)
     .then(response=>{
         alert(response.data);
     })

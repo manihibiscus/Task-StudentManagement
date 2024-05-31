@@ -73,7 +73,7 @@ export const Attendence = () => {
 
   const handleSubmit = () => {
     if(value.length == data.length){
-    axios.post("http://localhost:3000/postattendence", value)
+    axios.post("https://task-student-management-sxna.vercel.app/postattendence", value)
       .then((response) => {
         alert(response.data);
       })

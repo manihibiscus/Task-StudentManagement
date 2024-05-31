@@ -8,7 +8,7 @@ const studentDetailsSlice = createSlice({
         updateStudentData:(state, action)=>{
             state.updateData=action.payload
             console.log("Updating Data"+state.updateData.userId);
-            axios.patch(`http://localhost:3000/updateData/${state.updateData.id}`,state.updateData)
+            axios.patch(`https://task-student-management-sxna.vercel.app/updateData/${state.updateData.id}`,state.updateData)
             .then(response=>{
                 alert(response.data);
             })
@@ -19,7 +19,7 @@ const studentDetailsSlice = createSlice({
         deleteStudentData:(state,action)=>{
             state.deleteId = action.payload
             console.log(state.deleteId);
-            axios.delete(`http://localhost:3000/deleteData/${state.deleteId}`)
+            axios.delete(`https://task-student-management-sxna.vercel.app/deleteData/${state.deleteId}`)
             .then(response=>{
                 alert(response.data);
             })
@@ -37,7 +37,7 @@ const studentDetailsSlice = createSlice({
         },
         attendenceUpdate:(state,action)=>{
             console.log(action.payload[1].editedData);
-            axios.patch(`http://localhost:3000/updateattendence/${action.payload[0].id}`,action.payload[1].editedData)
+            axios.patch(`https://task-student-management-sxna.vercel.app/updateattendence/${action.payload[0].id}`,action.payload[1].editedData)
             .then(response=>{
                 alert(response.data);
             })

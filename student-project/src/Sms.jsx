@@ -9,7 +9,7 @@ function App(){
 
     const sendSMS = async () => {
         try {
-            const res = await axios.post('http://localhost:3000/send-sms', { to, message });
+            const res = await axios.post('https://task-student-management-sxna.vercel.app/send-sms', { to, message });
             setResponse(res.data.success ? 'Message sent successfully!' : 'Failed to send message.');
         } catch (error) {
             setResponse('Error: ' + error.message);

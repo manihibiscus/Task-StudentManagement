@@ -4,10 +4,10 @@ import axios from 'axios'
 export const fetchData = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get("http://localhost:3000/items");
-            const response2 = await axios.get("http://localhost:3000/adminItem");
-            const response3 = await axios.get("http://localhost:3000/getstudentregistration");
-            const response4 = await axios.get("http://localhost:3000/getattendence");
+            const response = await axios.get("https://task-student-management-sxna.vercel.app/items");
+            const response2 = await axios.get("https://task-student-management-sxna.vercel.app/adminItem");
+            const response3 = await axios.get("https://task-student-management-sxna.vercel.app/getstudentregistration");
+            const response4 = await axios.get("https://task-student-management-sxna.vercel.app/getattendence");
             const data = response.data;
             const data2 = response2.data;
             const data3 = response3.data;

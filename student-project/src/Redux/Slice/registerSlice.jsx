@@ -176,7 +176,7 @@ const registerSlice = createSlice({
 
                 console.log(detail);
                 
-                axios.post('http://localhost:3000/postItems', detail)
+                axios.post('https://task-student-management-sxna.vercel.app/postItems', detail)
                     .then(response => {
                         alert(response.data);
                     })

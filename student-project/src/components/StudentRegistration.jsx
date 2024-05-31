@@ -81,7 +81,7 @@ export const StudentRegistration = () => {
   };
 
   const postData = () =>{
-    axios.post('http://localhost:3000/poststudentregistration', formData)
+    axios.post('https://task-student-management-sxna.vercel.app/poststudentregistration', formData)
         .then(response => {
             // alert(response.data);
             toast.success(response.data);
@@ -102,7 +102,7 @@ export const StudentRegistration = () => {
         stdId:formData.registerNumber,
         stdDoB:formData.dob
     }
-    axios.post('http://localhost:3000/postItems', detail)
+    axios.post('https://task-student-management-sxna.vercel.app/postItems', detail)
         .then(response => {
             // alert(response.data);
             toast.success(response.data);

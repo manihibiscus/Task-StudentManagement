@@ -11,7 +11,7 @@ const initialState = {
 export const fetchData = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3000/getleaveform");
+      const response = await axios.get("https://task-student-management-sxna.vercel.app/getleaveform");
       const data = response.data;
       // console.log(data[0].userId);
       dispatch(getLeaveRequestDetails(data));
@@ -29,7 +29,7 @@ const leaveFormSlice = createSlice({
       state.postLeaveReqDetails = action.payload;
 
       axios
-        .post("http://localhost:3000/postleaveform", state.postLeaveReqDetails)
+        .post("https://task-student-management-sxna.vercel.app/postleaveform", state.postLeaveReqDetails)
         .then((response) => {
           alert(response.data);
         })
