@@ -35,7 +35,7 @@ export const Login = () => {
     <div>
     <div className="flex items-center justify-center mt-20 bg-white">
         <div className="w-full max-w-md p-8 space-y-6 rounded-xl border-2 shadow-lg md:border-2 md:border-gray-400">
-          <h1 className="text-center font-semibold text-xl md:text-4xl text-gray-800">Login</h1>
+          <h1 className="text-center font-semibold text-xl md:text-3xl text-gray-800">Login</h1>
           <form onSubmit={(e)=>dispatch(submitData(e))} className="space-y-">
             <div className="flex flex-col">
               <label htmlFor="email" className="md:text-lg font-medium text-gray-700">Register Number:</label>
