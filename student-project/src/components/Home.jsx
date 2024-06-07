@@ -1,7 +1,7 @@
 export const Home = () => {
   return (
     <div className="container mx-auto p-4">
-      <p className="text-center text-3xl font-serif text-gray-700 pt-4 mb-6">Welcome to Student Management</p>
+      <p className="text-center text-xl md:text-3xl font-serif text-gray-700 pt-4 mb-6">Welcome to Student Management</p>
       <div className="flex flex-col md:flex-row">
         <div className="bg-blue-300 w-full md:w-2/3 rounded-lg overflow-hidden shadow-lg">
           <img className="w-full h-auto object-cover" src="/std.jpg" alt="Students" />

@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors()); 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
 
@@ -114,6 +114,16 @@ app.get('/getstudentregistration', async (req, res) => {
   }
 });
 
+app.get('/getMarkDetails', async (req, res) => {
+  try {
+    const database = client.db('PracticeReact');
+    const collection = database.collection('MarkDetails');
+    const items = await collection.find({}).toArray();
+    res.json(items);
+  } catch (error) {
+    res.status(500).send('Error fetching data from the database');
+  }
+});
 // Post----------------
 
 app.post('/postItems', async (req, res) => {
@@ -125,6 +135,22 @@ app.post('/postItems', async (req, res) => {
     const result = await collection.insertOne(newItem);
     // console.log(res.status(201).json(result));
     res.send("Login Added Successfully!")
+  } catch (error) {
+    res.status(500).send('Error inserting data into the database');
+  }
+});
+
+
+// Post Mark
+app.post('/postmark', async (req, res) => {
+  try {
+    const newItem = req.body;
+    console.log(newItem);
+    const database = client.db('PracticeReact');
+    const collection = database.collection('MarkDetails');
+    const result = await collection.insertOne(newItem);
+    // console.log(res.status(201).json(result));
+    res.send("Mark Posted Successfully!")
   } catch (error) {
     res.status(500).send('Error inserting data into the database');
   }

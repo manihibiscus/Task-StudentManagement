@@ -13,13 +13,15 @@
   // import { AdminPage } from './components/AdminPage'
   // import { AttendStudent } from './components/AttendStudent'
   // import { Attendence } from './components/Attendence'
-  import { Attendence } from './components/Attendence'
+import { Attendence } from './components/Attendence'
 import ProctectRoute from '../ProtectedRouter/Protectroute'
 import { LeaveRequest } from './components/LeaveRequest'
 import { LeaveStatus } from './components/LeaveStatus'
 import { LeaveConfrim } from './components/LeaveConfrim'
 import { StudentHome } from './components/StudentHome'
 import { StudentRegistration } from './components/StudentRegistration'
+import { Mark } from './components/Mark/Mark'
+import { Entry } from './components/Mark/Entry'
 // import { useState } from 'react'
 // import Alert from './Alert'
   // import ProtectedRoute from '../ProtectedRouter/Protectroute'
@@ -55,6 +57,8 @@ import { StudentRegistration } from './components/StudentRegistration'
       <Route path='/leaveconfrim' element={<LeaveConfrim />} />
       <Route path='/studenthome' element={<StudentHome />} />
       <Route path='/studentregistration' element={<StudentRegistration />} />
+      <Route path='/mark' element={<Mark />} />
+      <Route path='/entry' element={<Entry />} />
       </Route>
       </Routes>
       </Provider>
