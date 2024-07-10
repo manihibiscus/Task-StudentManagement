@@ -12,6 +12,7 @@ export const Entry = () => {
   };
   const [markData, setMarkData] = useState(initialFormData);
   const [total, setTotal] = useState("");
+  const [result, setResult] = useState("");
   const [markStatus,setMarkStatus]= useState(false);
   const navigate = useNavigate();
 
@@ -33,9 +34,11 @@ export const Entry = () => {
       markData.social <35
     ){
       setMarkStatus(true);
+      setResult("Fail");
     }
     else{
       setMarkStatus(false);
+      setResult("Pass");
 
     }
     if (
@@ -66,7 +69,8 @@ export const Entry = () => {
       science: markData.science,
       social: markData.social,
       total: total,
-      studentName: getDetails.studentName
+      studentName: getDetails.studentName,
+      result: result
     };
 
     if(markData.tamil &&

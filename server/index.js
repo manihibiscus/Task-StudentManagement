@@ -36,24 +36,24 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.json());
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const fromNumber = process.env.TWILIO_PHONE_NUMBER;
-const cli = twilio(accountSid, authToken);
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const fromNumber = process.env.TWILIO_PHONE_NUMBER;
+// const cli = twilio(accountSid, authToken);
 
-app.post('/send-sms', (req, res) => {
-    const { to, message } = req.body;
-    cli.messages.create({
-        body: message,
-        from: fromNumber,
-        to: to
-    })
-    .then(message => res.status(200).send({ success: true, messageSid: message.sid }))
-    .catch(err => {
-        console.error('Error sending SMS:', err); // Log the error details
-        res.status(500).send({ success: false, error: err.message });
-    });
-});
+// app.post('/send-sms', (req, res) => {
+//     const { to, message } = req.body;
+//     cli.messages.create({
+//         body: message,
+//         from: fromNumber,
+//         to: to
+//     })
+//     .then(message => res.status(200).send({ success: true, messageSid: message.sid }))
+//     .catch(err => {
+//         console.error('Error sending SMS:', err); // Log the error details
+//         res.status(500).send({ success: false, error: err.message });
+//     });
+// });
 
 
 

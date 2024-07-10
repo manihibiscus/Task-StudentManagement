@@ -67,6 +67,7 @@ export const Header = () => {
                     <a className="font-medium hover:text-blue-500"><Link to="/studentregistration">Student Registration</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link to="/attendence">Attendence</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link to="/leaveconfrim">Leave Confrim </Link></a>
+                    <a className="font-medium hover:text-blue-500"><Link to="/mark">Mark Entry</Link></a>
                     <a className="font-medium hover:text-blue-500"><Link onClick={()=>dispatch(logout())} to="/home">Logout</Link></a>
                 </div>
             )}
@@ -93,6 +94,7 @@ export const Header = () => {
         <Link to="/studentregistration"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Student Registration</a></Link>
         <Link to="/attendence"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Attendence</a></Link>
         <Link to="/leaveconfrim"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Leave Confrim</a></Link>
+        <Link to="/mark"  onClick={()=>dispatch(clickMenu())} ><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2"  >Mark Entry</a></Link>
         <Link onClick={()=>dispatch(logout())} to="/home"><a className="font-medium hover:text-pink-600 hover:bg-blue-200 block text-center p-2 border-blue-300 border-2">Logout</a></Link>
     </div>)}
     {userValue && !value && (

@@ -54,6 +54,7 @@ export const Mark = () => {
               <th className="py-3 px-6 text-left font-semibold">Student Name</th>
               <th className="py-3 px-6 text-left font-semibold">Class</th>
               <th className="py-3 px-6 text-left font-semibold">Total Mark</th>
+              <th className="py-3 px-6 text-left font-semibold">Result</th>
               <th className="py-3 px-6 text-left font-semibold">Mark Entry</th>
             </tr>
           </thead>
@@ -78,7 +79,9 @@ export const Mark = () => {
       <tr key={student._id} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}>
         <td className="py-3 px-6 border-b border-gray-200">{student.studentName}</td>
         <td className="py-3 px-6 border-b border-gray-200">{student.className}</td>
-        <td className={`py-3 px-6 border-b ${mark && !mark.promote ? 'text-red-500' : ''} border-gray-200 text-lg font-bold`}>{mark ? mark.total : 'N/A'}</td>
+        <td className={`py-3 px-6 border-b ${mark && mark.result == "Fail" ? 'text-red-500' : mark && mark.result == 'Pass' ? 'text-green-600' : ''} border-gray-200 text-lg font-bold`}>{mark ? mark.total : 'N/A'}</td>
+        <td className={`py-3 px-6 border-b ${mark && mark.result == "Fail" ? 'text-red-500' : mark && mark.result == 'Pass' ? 'text-green-600' : ''} border-gray-200 text-lg font-bold`}>{mark ? mark.result : 'N/A'}</td>
+
         <td className="py-3 px-6 border-b border-gray-200">
           <button onClick={(e) => sendEntry(e, student)} className={`bg-green-500 ${mark ? 'hidden' : 'block'} text-white px-4 py-2 rounded hover:bg-green-600`}>Entry</button>
         </td>
