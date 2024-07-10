@@ -37,8 +37,9 @@ import { Entry } from './components/Mark/Entry'
     // };
     
     return (
-      <BrowserRouter>
       <Provider store={store}>
+
+      <BrowserRouter>
       {/* {alertVisible && <Alert message="This is an alert message." onClose={closeAlert} />} */}
       <Header />
       <Routes>
@@ -61,8 +62,9 @@ import { Entry } from './components/Mark/Entry'
       <Route path='/entry' element={<Entry />} />
       </Route>
       </Routes>
-      </Provider>
       </BrowserRouter>
+      </Provider>
+
       
     )
   }
