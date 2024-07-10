@@ -150,7 +150,7 @@ app.post('/postmark', async (req, res) => {
     const collection = database.collection('MarkDetails');
     const result = await collection.insertOne(newItem);
     // console.log(res.status(201).json(result));
-    res.send("Mark Posted Successfully!")
+    res.send("Mark Posted Successfully!");
   } catch (error) {
     res.status(500).send('Error inserting data into the database');
   }

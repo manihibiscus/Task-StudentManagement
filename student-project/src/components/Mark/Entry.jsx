@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const Entry = () => {
-  const initialFormData = {
+  var initialFormData = {
     tamil: "",
     english: "",
     maths: "",
@@ -12,15 +12,32 @@ export const Entry = () => {
   };
   const [markData, setMarkData] = useState(initialFormData);
   const [total, setTotal] = useState("");
+  const [markStatus,setMarkStatus]= useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (total) {
-      postData();
-    }
-  }, [total]);
+  const getDetails=JSON.parse(sessionStorage.getItem("stdDet"))
+  // useEffect(() => {
+  //   console.log(getDetails)
+  //   if (total) {
+  //     postData();
+  //   }
+  // }, []);
 
   const totalMarks = () => {
+    
+    if(
+      markData.tamil < 35 ||
+      markData.english < 35 ||
+      markData.maths < 35 ||
+      markData.science < 35 ||
+      markData.social <35
+    ){
+      setMarkStatus(true);
+    }
+    else{
+      setMarkStatus(false);
+
+    }
     if (
       markData.tamil &&
       markData.english &&
@@ -35,7 +52,8 @@ export const Entry = () => {
       const p5 = parseInt(markData.social);
       const sum = p1 + p2 + p3 + p4 + p5;
       setTotal(sum);
-    } else {
+    } 
+    else {
       alert("Enter All the Fields");
     }
   };
@@ -48,16 +66,30 @@ export const Entry = () => {
       science: markData.science,
       social: markData.social,
       total: total,
+      studentName: getDetails.studentName
     };
 
-    axios.post("http://localhost:3000/postmark", details)
+    if(markData.tamil &&
+      markData.english &&
+      markData.maths &&
+      markData.science &&
+      markData.social && total){
+
+    axios.post("https://task-student-management-sxna.vercel.app/postmark", details)
       .then((response) => {
         alert(response.data);
+        // initialFormData={};
+        (navigate("/mark"));
+
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("Error occurred");
       });
+    }
+    else{
+      alert("Enter the Marks correctly")
+    }
   };
 
   const handleChange = (e) => {
@@ -75,10 +107,10 @@ export const Entry = () => {
           <p className="text-center text-xl p-2">Annual Mark Entry</p>
           <div className="flex justify-between p-4 pl-8 pr-8 text-lg">
             <p>
-              Name: <span>Manikandan S</span>
+              Name: <span>{getDetails.studentName}</span>
             </p>
             <p>
-              Class: <span>10</span>
+              Class: <span>{getDetails.className}{getDetails.section} </span>
             </p>
           </div>
           <div className="flex justify-center p-4 bg-gray-100 min-h-screen">
@@ -99,7 +131,7 @@ export const Entry = () => {
                   <td className="pl-4 py-2">
                     <input
                       type="text"
-                      className="w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${markData.tamil <35 ? 'text-red-500 font-bold text-xl' : 'text-green-600 font-bold text-xl'}`}
                       name="tamil"
                       onChange={handleChange}
                       value={markData.tamil}
@@ -111,7 +143,7 @@ export const Entry = () => {
                   <td className="pl-4 py-2">
                     <input
                       type="text"
-                      className="w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${markData.english < 35 ? 'text-red-500 font-bold text-xl' : 'text-green-600 font-bold text-xl'}`}
                       name="english"
                       onChange={handleChange}
                       value={markData.english}
@@ -123,7 +155,7 @@ export const Entry = () => {
                   <td className="pl-4 py-2">
                     <input
                       type="text"
-                      className="w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${markData.maths<35 ? 'text-red-500 font-bold text-xl' : 'text-green-600 font-bold text-xl'}`}
                       name="maths"
                       onChange={handleChange}
                       value={markData.maths}
@@ -135,7 +167,7 @@ export const Entry = () => {
                   <td className="pl-4 py-2">
                     <input
                       type="text"
-                      className="w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${markData.science<35 ? 'text-red-500 font-bold text-xl' : 'text-green-600 font-bold text-xl'}`}
                       name="science"
                       onChange={handleChange}
                       value={markData.science}
@@ -149,7 +181,7 @@ export const Entry = () => {
                   <td className="pl-4 py-2">
                     <input
                       type="text"
-                      className="w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${markData.social<35 ? 'text-red-500 font-bold text-xl' : 'text-green-600 font-bold text-xl'}`}
                       name="social"
                       onChange={handleChange}
                       value={markData.social}
@@ -174,12 +206,20 @@ export const Entry = () => {
                   <td className="pl-4 py-2">
                     <input
                       type="text"
-                      className="w-20 h-8 p-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className={`w-20 h-8 p-1 border text-center border-gray-300 ${markStatus ? 'text-red-500 text-xl font-bold': 'text-green-600 text-xl font-bold '} rounded focus:outline-none focus:ring-2 focus:ring-blue-400`}
                       name="total"
                       value={total}
                       readOnly
                       disabled
                     />
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                  <button onClick={postData} className="px-2 mb-2 py-1 border-solid border-blue-400 rounded-lg text-lg font-bold text-yellow-700 bg-blue-300 border-2 m-1">
+                    Post
+                  </button>
                   </td>
                 </tr>
               </tbody>

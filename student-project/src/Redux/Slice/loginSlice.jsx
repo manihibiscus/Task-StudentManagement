@@ -15,12 +15,11 @@ export const fetchData = () => {
             // console.log(data[0].userId);
             dispatch(fetchLoginData(data));
             dispatch(fetchAdminData(data2));
-            dispatch(fetchStudRegData(data3))
-            dispatch(fetchAttendenceData(data4))
-        } catch (error) {
+            dispatch(fetchStudRegData(data3));
+            dispatch(fetchAttendenceData(data4));
+        } 
+        catch (error) {
             console.error('Error fetching data:', error);
-
-
         }
     };
 };
